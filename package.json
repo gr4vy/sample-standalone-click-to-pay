@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@gr4vy/poutine-react": "^3.2.0",
+    "@gr4vy/poutine-react": "3.0.2--canary.526.4535b2b.0",
     "@gr4vy/poutine-tokens": "^0.23.0",
     "@tailwindcss/vite": "^4.1.17",
     "react": "^19.2.0",
@@ -24,9 +26,12 @@
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react-swc": "^4.2.1",
     "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.7.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.3",
     "vite": "^7.2.2"

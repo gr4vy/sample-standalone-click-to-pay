@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "@gr4vy/poutine-tokens/css/theme.css"
+@import 'tailwindcss';
+@import '@gr4vy/poutine-tokens/css/theme.css';
 
 @layer base {
   :root {
