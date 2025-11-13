@@ -270,13 +270,6 @@
     clsx "^1.2.1"
     copy-to-clipboard "^3.3.3"
 
-"@gr4vy/poutine-tailwind-preset@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@gr4vy/poutine-tailwind-preset/-/poutine-tailwind-preset-1.1.0.tgz#ed6484828f878e9cc79538fe7050288b457d532c"
-  integrity sha512-aRHbJU38WQVHrgq0rUkgHC9R+6YHc1cs8TRqRzi4NXsaZ9wTNQR0f0YaZ/tZ8D3V2Y7zqvRquzd4CVNm6Setuw==
-  dependencies:
-    "@gr4vy/poutine-tokens" "^0.23.0"
-
 "@gr4vy/poutine-tokens@^0.23.0":
   version "0.23.0"
   resolved "https://registry.npmjs.org/@gr4vy/poutine-tokens/-/poutine-tokens-0.23.0.tgz#b5e831b13c5b800fe896753406ed0ccc1b78318f"
