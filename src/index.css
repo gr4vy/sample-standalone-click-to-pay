@@ -6,4 +6,8 @@
     @apply antialiased;
     text-rendering: optimizeLegibility;
   }
+
+  body {
+    @apply text-black;
+  }
 }
