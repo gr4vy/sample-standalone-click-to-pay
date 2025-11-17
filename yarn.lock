@@ -275,10 +275,10 @@
   resolved "https://registry.npmjs.org/@gr4vy/poutine-tokens/-/poutine-tokens-0.22.1.tgz#dbf834bfcaf1934b38b32bbc866298a7bf2924ef"
   integrity sha512-rSYgYpawW5ZRfnyZ9hK7aUcoR77QKefX+b0TTR91gqu6EEeuZhvPVJNxE0qCsyPbh8F2/veg9MhSrFpe5xrbzg==
 
-"@gr4vy/poutine-tokens@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.npmjs.org/@gr4vy/poutine-tokens/-/poutine-tokens-0.23.0.tgz#b5e831b13c5b800fe896753406ed0ccc1b78318f"
-  integrity sha512-HicA3pnNccdVyUJ6GNLePN3cj9gpOactUrR6JW3d7bbTJPSgk2x5/hU1eO9qTyY0KCSXbRgqZ3OGzhUhfZOmxA==
+"@gr4vy/poutine-tokens@^0.24.0":
+  version "0.24.0"
+  resolved "https://registry.npmjs.org/@gr4vy/poutine-tokens/-/poutine-tokens-0.24.0.tgz#f357fcdc61a0316da7068911701cac53b53cfbe9"
+  integrity sha512-0WHYfPyrBcWQWNg0lqp9KLIjafaUyceBPEMG961V6ZHtE+g+75xzGU48aLopq14xWTqpDxuIRiFVSuPSYX2jBQ==
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"
