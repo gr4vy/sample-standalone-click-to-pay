@@ -1,9 +1,9 @@
-import { Box, Flex, Stack, Text } from '@gr4vy/poutine-react'
+import { Box, Flex, Text } from '@gr4vy/poutine-react'
+import { Accordion } from './Accordion'
 
 export const OrderSummary = () => {
   return (
-    <Stack gap={12}>
-      <Text as="h3">Order Summary</Text>
+    <Accordion header={<Text as="h3">Order Summary</Text>}>
       <Flex gap={12}>
         <Box
           width={64}
@@ -16,6 +16,6 @@ export const OrderSummary = () => {
           <Text as="strong">$329.99</Text>
         </Box>
       </Flex>
-    </Stack>
+    </Accordion>
   )
 }
