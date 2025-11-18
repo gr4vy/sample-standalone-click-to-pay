@@ -2,12 +2,12 @@ import { Button, Stack, type ButtonProps } from '@gr4vy/poutine-react'
 import { createLink, type LinkProps } from '@tanstack/react-router'
 import { useState } from 'react'
 import { OrderSummary } from './OrderSummary'
-import { PaymentMethods } from './PaymentMethods'
+import { PaymentMethods, type PaymentMethodsProps } from './PaymentMethods'
 import { TopBar } from './TopBar'
 import { User, type UserFormState } from './User'
 
 export interface CheckoutProps {
-  type: 'inline' | 'overlay' | 'action-sheet'
+  type: PaymentMethodsProps['checkoutType']
 }
 
 const SubmitButton = ({ children, ...rest }: ButtonProps & LinkProps) => {

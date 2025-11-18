@@ -27,7 +27,7 @@ const PaymentMethod = ({
   )
 }
 
-export interface PaymentMethods {
+export interface PaymentMethodsProps {
   checkoutType: 'inline' | 'overlay' | 'action-sheet'
   user?: UserFormState
   onClick: (id: string) => void
@@ -37,7 +37,7 @@ export const PaymentMethods = ({
   checkoutType,
   user,
   onClick,
-}: PaymentMethods) => {
+}: PaymentMethodsProps) => {
   const [active, setActive] = useState('click-to-pay')
 
   const handleOnClick = (id: string, name: string) => {
@@ -65,13 +65,13 @@ export const PaymentMethods = ({
           name="Card"
           active={active}
           onClick={handleOnClick}
-        ></PaymentMethod>
+        />
         <PaymentMethod
           id="paypal"
           name="PayPal"
           active={active}
           onClick={handleOnClick}
-        ></PaymentMethod>
+        />
       </ul>
     </Stack>
   )

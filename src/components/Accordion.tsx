@@ -39,13 +39,8 @@ export const Accordion = ({ children, header }: AccordionProps) => {
   const [collapsed, setCollapsed] = useState(true)
   const contentRef = useRef<HTMLDivElement>(null)
 
-  const toggle = () => {
-    if (contentRef?.current?.style?.maxHeight !== '0px') {
-      setCollapsed(true)
-    } else {
-      setCollapsed(false)
-    }
-  }
+  const toggle = () =>
+    setCollapsed(contentRef?.current?.style?.maxHeight !== '0px')
 
   return (
     <Box>
@@ -54,7 +49,7 @@ export const Accordion = ({ children, header }: AccordionProps) => {
         className="flex w-full cursor-pointer items-center justify-between"
       >
         {header}
-        <span>{collapsed ? <ChevronDown /> : <ChevronUp />}</span>
+        {collapsed ? <ChevronDown /> : <ChevronUp />}
       </button>
       <Box
         ref={contentRef}
