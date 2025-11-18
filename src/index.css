@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+@import '@gr4vy/poutine-tokens/css/theme.css';
+
+@layer base {
+  :root {
+    @apply antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply text-black;
+  }
+
+  h2 {
+    @apply text-lg font-bold;
+  }
+
+  h3 {
+    @apply text-base font-bold;
+  }
+
+  h4 {
+    @apply text-sm font-bold;
+  }
+
+  h5 {
+    @apply text-xs font-bold;
+  }
+}
