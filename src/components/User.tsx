@@ -2,10 +2,10 @@ import { Button, Input, Stack, Text } from '@gr4vy/poutine-react'
 import { useActionState, useEffect } from 'react'
 
 export interface UserProps {
-  onSignIn: (formState: Record<string, unknown>) => void
+  onSignIn: (formState: UserFormState) => void
 }
 
-type UserFormState = {
+export type UserFormState = {
   email: string
   phoneNumber: string
 }
@@ -34,10 +34,8 @@ export const User = ({ onSignIn }: UserProps) => {
   const isLoggedIn = formState?.email || formState?.phoneNumber
 
   useEffect(() => {
-    if (isLoggedIn) {
-      onSignIn(formState)
-    }
-  }, [isLoggedIn, formState, onSignIn])
+    onSignIn(formState)
+  }, [formState, onSignIn])
 
   return (
     <form action={formAction}>

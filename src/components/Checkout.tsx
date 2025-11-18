@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { OrderSummary } from './OrderSummary'
 import { PaymentMethods } from './PaymentMethods'
 import { TopBar } from './TopBar'
-import { User } from './User'
+import { User, type UserFormState } from './User'
 
 export interface CheckoutProps {
   type: 'inline' | 'overlay' | 'action-sheet'
@@ -22,18 +22,16 @@ const Link = createLink(SubmitButton)
 
 export const Checkout = ({ type }: CheckoutProps) => {
   const [method, setMethod] = useState<string>('Click to Pay')
-  const [user, setUser] = useState<Record<string, unknown>>()
-  console.log(user)
+  const [user, setUser] = useState<UserFormState>()
 
   return (
     <Stack padding={24} gap={32}>
       <TopBar title="Checkout" hasBackButton />
       <OrderSummary />
-      <User
-        onSignIn={(formState: Record<string, unknown>) => setUser(formState)}
-      />
+      <User onSignIn={(formState: UserFormState) => setUser(formState)} />
       <PaymentMethods
         checkoutType={type}
+        user={user}
         onClick={(name: string) => setMethod(name)}
       />
       <Link to="/success" state={{ type, method }}>

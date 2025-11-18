@@ -1,5 +1,6 @@
 import { Box, Stack, Text } from '@gr4vy/poutine-react'
 import { useState, type PropsWithChildren } from 'react'
+import type { UserFormState } from './User'
 
 export interface PaymentMethodProps extends PropsWithChildren {
   active?: string
@@ -28,10 +29,15 @@ const PaymentMethod = ({
 
 export interface PaymentMethods {
   checkoutType: 'inline' | 'overlay' | 'action-sheet'
+  user?: UserFormState
   onClick: (id: string) => void
 }
 
-export const PaymentMethods = ({ checkoutType, onClick }: PaymentMethods) => {
+export const PaymentMethods = ({
+  checkoutType,
+  user,
+  onClick,
+}: PaymentMethods) => {
   const [active, setActive] = useState('click-to-pay')
 
   const handleOnClick = (id: string, name: string) => {
@@ -49,7 +55,10 @@ export const PaymentMethods = ({ checkoutType, onClick }: PaymentMethods) => {
           active={active}
           onClick={handleOnClick}
         >
-          <Box marginTop={8}>{checkoutType} UX flow content</Box>
+          <Box marginTop={8}>
+            <Text>{checkoutType} UX flow content</Text>
+            <Text>{user?.email || user?.phoneNumber}</Text>
+          </Box>
         </PaymentMethod>
         <PaymentMethod
           id="card"
