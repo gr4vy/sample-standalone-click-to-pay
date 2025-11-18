@@ -3,7 +3,7 @@ import { Accordion } from './Accordion'
 
 export const OrderSummary = () => {
   return (
-    <Accordion header={<Text as="h3">Order Summary</Text>}>
+    <Accordion header={<Text as="h2">Order Summary</Text>}>
       <Flex gap={12}>
         <Box
           width={64}

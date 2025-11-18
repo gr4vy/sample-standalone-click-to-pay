@@ -10,17 +10,18 @@ const Link = createLink(TextLink)
 
 export const TopBar = ({ title, hasBackButton }: TopBarProps) => {
   return (
-    <>
+    <Box width="full">
       <Box
         display="grid"
         gap={8}
+        paddingBottom={12}
         alignItems="center"
         minWidth="full"
-        className="grid-cols-[1fr_minmax(0,auto)_1fr]"
+        className="min-h-12 grid-cols-[1fr_minmax(0,auto)_1fr]"
       >
         <Box>
           {hasBackButton && (
-            <Link to="/" className="p-2">
+            <Link to="/" className="p-1.5">
               Back
             </Link>
           )}
@@ -30,6 +31,6 @@ export const TopBar = ({ title, hasBackButton }: TopBarProps) => {
         </Box>
       </Box>
       <Divider />
-    </>
+    </Box>
   )
 }

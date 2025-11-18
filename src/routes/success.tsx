@@ -9,9 +9,17 @@ import {
 import {
   createFileRoute,
   createLink,
+  useRouterState,
   type LinkProps,
 } from '@tanstack/react-router'
 import { TopBar } from '../components/TopBar'
+
+declare module '@tanstack/react-router' {
+  interface HistoryState {
+    method?: string
+    type?: 'inline' | 'overlay' | 'action-sheet'
+  }
+}
 
 export const Route = createFileRoute('/success')({
   component: RouteComponent,
@@ -28,6 +36,8 @@ const RestartButton = ({ children, ...rest }: ButtonProps & LinkProps) => {
 const Link = createLink(RestartButton)
 
 function RouteComponent() {
+  const state = useRouterState({ select: (s) => s.location.state })
+
   return (
     <Stack padding={24} gap={24}>
       <TopBar title="Checkout" hasBackButton={false} />
@@ -46,10 +56,10 @@ function RouteComponent() {
         <Divider width="md" />
         <Box>
           <strong>Payment method</strong>
-          <Text>Click to Pay</Text>
+          <Text>{state?.method}</Text>
         </Box>
       </Stack>
-      <Link to="/">Restart</Link>
+      <Link to={`/${state?.type || ''}`}>Restart</Link>
     </Stack>
   )
 }

@@ -5,7 +5,7 @@ export interface PaymentMethodProps extends PropsWithChildren {
   active?: string
   id: string
   name: string
-  onClick: (id: string) => void
+  onClick: (id: string, name: string) => void
 }
 
 const PaymentMethod = ({
@@ -18,7 +18,7 @@ const PaymentMethod = ({
   return (
     <li
       className={`cursor-pointer rounded-sm border-[1px] border-gray-40 px-3.5 py-3 ${active === id ? 'border-gray-90' : ''}`}
-      onClick={() => onClick(id)}
+      onClick={() => onClick(id, name)}
     >
       <strong>{name}</strong>
       <Box hidden={active !== id}>{children}</Box>
@@ -28,12 +28,16 @@ const PaymentMethod = ({
 
 export interface PaymentMethods {
   checkoutType: 'inline' | 'overlay' | 'action-sheet'
+  onClick: (id: string) => void
 }
 
-export const PaymentMethods = ({ checkoutType }: PaymentMethods) => {
+export const PaymentMethods = ({ checkoutType, onClick }: PaymentMethods) => {
   const [active, setActive] = useState('click-to-pay')
 
-  const handleOnClick = (id: string) => setActive(id)
+  const handleOnClick = (id: string, name: string) => {
+    setActive(id)
+    onClick(name)
+  }
 
   return (
     <Stack gap={12}>

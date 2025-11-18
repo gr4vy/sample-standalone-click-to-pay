@@ -1,4 +1,4 @@
-import { ButtonLink, Stack } from '@gr4vy/poutine-react'
+import { ButtonLink, Stack, Text } from '@gr4vy/poutine-react'
 import { createFileRoute, createLink } from '@tanstack/react-router'
 import { TopBar } from '../components/TopBar'
 
@@ -18,6 +18,7 @@ function Index() {
       minWidth="full"
     >
       <TopBar title="Click to Pay UX Flows" />
+      <Text>See how you can integrate Click to Pay</Text>
       <Link to="/inline">Inline</Link>
       <Link to="/overlay">Overlay</Link>
       <Link to="/action-sheet">Action Sheet</Link>

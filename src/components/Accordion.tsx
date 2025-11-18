@@ -13,9 +13,9 @@ const ChevronDown = () => (
     className="h-4 w-4"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />
   </svg>
 )
@@ -28,9 +28,9 @@ const ChevronUp = () => (
     className="h-4 w-4"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />
   </svg>
 )
@@ -49,7 +49,10 @@ export const Accordion = ({ children, header }: AccordionProps) => {
 
   return (
     <Box>
-      <button onClick={toggle} className="flex w-full justify-between">
+      <button
+        onClick={toggle}
+        className="flex w-full cursor-pointer items-center justify-between"
+      >
         {header}
         <span>{collapsed ? <ChevronDown /> : <ChevronUp />}</span>
       </button>
