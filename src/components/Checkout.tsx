@@ -22,12 +22,16 @@ const Link = createLink(SubmitButton)
 
 export const Checkout = ({ type }: CheckoutProps) => {
   const [method, setMethod] = useState<string>('Click to Pay')
+  const [user, setUser] = useState<Record<string, unknown>>()
+  console.log(user)
 
   return (
     <Stack padding={24} gap={32}>
       <TopBar title="Checkout" hasBackButton />
       <OrderSummary />
-      <User />
+      <User
+        onSignIn={(formState: Record<string, unknown>) => setUser(formState)}
+      />
       <PaymentMethods
         checkoutType={type}
         onClick={(name: string) => setMethod(name)}
