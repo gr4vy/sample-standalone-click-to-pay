@@ -3,6 +3,7 @@
   "extends": ["github>gr4vy/renovate-config:javascript"],
   "additionalReviewers": ["luca-gr4vy"],
   "ignorePaths": [".github/**", ".vscode/**"],
+  "ignoreTests": true,
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
