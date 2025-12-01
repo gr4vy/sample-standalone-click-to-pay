@@ -16,5 +16,6 @@
       "labels": ["dependencies", "patch"],
       "semanticCommitScope": "deps"
     }
-  ]
+  ],
+  "ignoreDeps": ["@gr4vy/poutine-react"]
 }
