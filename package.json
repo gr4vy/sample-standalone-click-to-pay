@@ -15,14 +15,14 @@
     "@gr4vy/poutine-react": "3.0.2--canary.526.4535b2b.0",
     "@gr4vy/poutine-tokens": "^0.24.0",
     "@tailwindcss/vite": "^4.1.17",
-    "@tanstack/react-router": "^1.136.18",
+    "@tanstack/react-router": "^1.139.12",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@tanstack/router-plugin": "^1.136.18",
+    "@tanstack/router-plugin": "^1.139.12",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
