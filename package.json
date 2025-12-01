@@ -12,7 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@gr4vy/poutine-react": "3.0.2--canary.526.4535b2b.0",
+    "@gr4vy/poutine-react": "3.3.0",
     "@gr4vy/poutine-tokens": "^0.24.0",
     "@tailwindcss/vite": "^4.1.17",
     "@tanstack/react-router": "^1.139.12",

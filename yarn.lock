@@ -489,12 +489,12 @@
   resolved "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.10.tgz#a2a1e3812d14525f725d011a73eceb41fef5bc1c"
   integrity sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==
 
-"@gr4vy/poutine-react@3.0.2--canary.526.4535b2b.0":
-  version "3.0.2--canary.526.4535b2b.0"
-  resolved "https://registry.npmjs.org/@gr4vy/poutine-react/-/poutine-react-3.0.2--canary.526.4535b2b.0.tgz#6dbe879a14e599f4d15f734e4f2789339bc98e46"
-  integrity sha512-g7/3aDnXcBKnKx/gjuqcIVDENNvZ1wkE2kCn8aoG++8kVI84sgr4Q7gzoEI9nctoK/LQhVPkHCJzNdqz+IhkkA==
+"@gr4vy/poutine-react@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@gr4vy/poutine-react/-/poutine-react-3.3.0.tgz#1cf97b4626dbe9479c8eb29f50ea4c3465990074"
+  integrity sha512-7Lo/nncKVc3FrBfC7ONtauUJ5d2/o8LvVkI5fe+TLWm+dW6O2xQewxi7wEUF43UVkeFb1Nky7atQ0bkOWM3jwA==
   dependencies:
-    "@gr4vy/poutine-tokens" "^0.22.1"
+    "@gr4vy/poutine-tokens" "^0.24.0"
     "@maskito/core" "^2.5.0"
     "@maskito/kit" "^2.5.0"
     "@maskito/react" "^2.5.0"
@@ -509,11 +509,6 @@
     "@vanilla-extract/sprinkles" "^1.6.3"
     clsx "^1.2.1"
     copy-to-clipboard "^3.3.3"
-
-"@gr4vy/poutine-tokens@^0.22.1":
-  version "0.22.1"
-  resolved "https://registry.npmjs.org/@gr4vy/poutine-tokens/-/poutine-tokens-0.22.1.tgz#dbf834bfcaf1934b38b32bbc866298a7bf2924ef"
-  integrity sha512-rSYgYpawW5ZRfnyZ9hK7aUcoR77QKefX+b0TTR91gqu6EEeuZhvPVJNxE0qCsyPbh8F2/veg9MhSrFpe5xrbzg==
 
 "@gr4vy/poutine-tokens@^0.24.0":
   version "0.24.0"
