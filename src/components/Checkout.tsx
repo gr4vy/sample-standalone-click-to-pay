@@ -1,42 +1,60 @@
-import { Button, Stack, type ButtonProps } from '@gr4vy/poutine-react'
-import { createLink, type LinkProps } from '@tanstack/react-router'
-import { useState } from 'react'
+/* eslint-disable react-refresh/only-export-components */
+import { Stack } from '@gr4vy/poutine-react'
+import {
+  createContext,
+  useContext,
+  useState,
+  type PropsWithChildren,
+} from 'react'
 import { OrderSummary } from './OrderSummary'
-import { PaymentMethods, type PaymentMethodsProps } from './PaymentMethods'
 import { TopBar } from './TopBar'
-import { User, type UserFormState } from './User'
+import type { UserFormState } from './User'
 
-export interface CheckoutProps {
-  type: PaymentMethodsProps['checkoutType']
+export type CheckoutType = 'inline' | 'overlay' | 'action-sheet'
+
+export type CheckoutMethod = {
+  id: string
+  name: string
 }
 
-const SubmitButton = ({ children, ...rest }: ButtonProps & LinkProps) => {
-  return (
-    <Button size="small" {...rest}>
-      {children}
-    </Button>
-  )
+export const CheckoutContext = createContext<
+  Partial<{
+    method: CheckoutMethod
+    setMethod: (method: CheckoutMethod) => void
+    setUser: (formState: UserFormState) => void
+    user?: UserFormState
+    type: CheckoutType
+  }>
+>({})
+
+export interface CheckoutProviderProps extends PropsWithChildren {
+  type: CheckoutType
 }
 
-const Link = createLink(SubmitButton)
-
-export const Checkout = ({ type }: CheckoutProps) => {
-  const [method, setMethod] = useState<string>('Click to Pay')
+export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
+  const [method, setMethod] = useState<CheckoutMethod>({
+    id: 'click-to-pay',
+    name: 'Click to Pay',
+  })
   const [user, setUser] = useState<UserFormState>()
 
   return (
-    <Stack padding={24} gap={32}>
-      <TopBar title="Checkout" hasBackButton />
-      <OrderSummary />
-      <User onSignIn={(formState: UserFormState) => setUser(formState)} />
-      <PaymentMethods
-        checkoutType={type}
-        user={user}
-        onClick={(name: string) => setMethod(name)}
-      />
-      <Link to="/success" state={{ type, method }}>
-        Submit
-      </Link>
-    </Stack>
+    <CheckoutContext.Provider
+      value={{ method, setMethod, user, setUser, type }}
+    >
+      <Stack padding={24} gap={32}>
+        <TopBar title="Checkout" hasBackButton />
+        <OrderSummary />
+        {children}
+      </Stack>
+    </CheckoutContext.Provider>
   )
+}
+
+export const useCheckout = () => {
+  return useContext(CheckoutContext)
+}
+
+export const Checkout = ({ children, type }: CheckoutProviderProps) => {
+  return <CheckoutProvider type={type}>{children}</CheckoutProvider>
 }

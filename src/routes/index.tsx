@@ -1,6 +1,6 @@
 import { ButtonLink, Stack, Text } from '@gr4vy/poutine-react'
 import { createFileRoute, createLink } from '@tanstack/react-router'
-import { TopBar } from '../components/TopBar'
+import { TopBar } from '@/components/TopBar'
 
 export const Route = createFileRoute('/')({
   component: Index,

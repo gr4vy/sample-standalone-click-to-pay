@@ -1,8 +1,9 @@
 import { Button, Input, Stack, Text } from '@gr4vy/poutine-react'
 import { useActionState, useEffect } from 'react'
+import { useCheckout } from './Checkout'
 
 export interface UserProps {
-  onSignIn: (formState: UserFormState) => void
+  onSignIn?: (formState: UserFormState) => void
 }
 
 export type UserFormState = {
@@ -31,11 +32,13 @@ const submit = async (
 
 export const User = ({ onSignIn }: UserProps) => {
   const [formState, formAction] = useActionState(submit, defaultState)
-  const isLoggedIn = formState?.email || formState?.phoneNumber
+  const { user, setUser } = useCheckout()
+  const isLoggedIn = user?.email || user?.phoneNumber
 
   useEffect(() => {
-    onSignIn(formState)
-  }, [formState, onSignIn])
+    setUser?.(formState)
+    onSignIn?.(formState)
+  }, [formState, onSignIn, setUser])
 
   return (
     <form action={formAction}>
