@@ -520,6 +520,18 @@
   resolved "https://registry.npmjs.org/@gr4vy/poutine-tokens/-/poutine-tokens-0.24.0.tgz#f357fcdc61a0316da7068911701cac53b53cfbe9"
   integrity sha512-0WHYfPyrBcWQWNg0lqp9KLIjafaUyceBPEMG961V6ZHtE+g+75xzGU48aLopq14xWTqpDxuIRiFVSuPSYX2jBQ==
 
+"@gr4vy/secure-fields-react@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/@gr4vy/secure-fields-react/-/secure-fields-react-2.2.0.tgz#d135a4c9799e75d647666ec62f560edaf160295b"
+  integrity sha512-CFQJEGXMDymJdtfWCy7KjRVnwcqyTl8+WazKDcdgQ2KFrh1yisIh+VJKG9l6Q6oQVA2N6sW8qltHJXLOFsOK8A==
+  dependencies:
+    "@gr4vy/secure-fields" "^2.2.0"
+
+"@gr4vy/secure-fields@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/@gr4vy/secure-fields/-/secure-fields-2.2.0.tgz#6d4b15596dcc8e0abb66b819e432a60a616a1350"
+  integrity sha512-C7tGscJvmn69XIQB3vUk/9R7jDTfTXC7gtUNybrP2fOYBth3yk9oEwbk11fGB9cGUC0fB1jtNRL/pUMEwERYXw==
+
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.npmjs.org/@humanfs/core/-/core-0.19.1.tgz#17c55ca7d426733fe3c561906b8173c336b40a77"
