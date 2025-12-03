@@ -5,8 +5,8 @@ import {
   useRouterState,
   type LinkProps,
 } from '@tanstack/react-router'
-import { TopBar } from '../components/TopBar'
-import type { PaymentMethodsProps } from '../components/PaymentMethods'
+import { TopBar } from '@/components/TopBar'
+import type { PaymentMethodsProps } from '@/components/PaymentMethods'
 
 declare module '@tanstack/react-router' {
   interface HistoryState {
