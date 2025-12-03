@@ -38,7 +38,6 @@ const Link = createLink(RestartButton)
 
 function RouteComponent() {
   const state = useRouterState({ select: (s) => s.location.state })
-  console.log('state', state)
 
   return (
     <Stack padding={24} gap={24}>
