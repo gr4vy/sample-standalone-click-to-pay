@@ -6,12 +6,12 @@ import {
   type LinkProps,
 } from '@tanstack/react-router'
 import { TopBar } from '@/components/TopBar'
-import type { PaymentMethodsProps } from '@/components/PaymentMethods'
+import type { CheckoutMethod, CheckoutType } from '@/components/Checkout'
 
 declare module '@tanstack/react-router' {
   interface HistoryState {
-    method?: string
-    type?: PaymentMethodsProps['checkoutType']
+    method?: CheckoutMethod
+    type?: CheckoutType
   }
 }
 
