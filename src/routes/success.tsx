@@ -12,13 +12,14 @@ import {
   useRouterState,
   type LinkProps,
 } from '@tanstack/react-router'
-import { TopBar } from '@/components/TopBar'
-import type { CheckoutMethod, CheckoutType } from '@/components/Checkout'
+import { TopBar, type CheckoutMethod, type CheckoutType } from '@/components'
+import type { Transaction, TransactionError } from '@/utils'
 
 declare module '@tanstack/react-router' {
   interface HistoryState {
     method?: CheckoutMethod
     type?: CheckoutType
+    transaction?: Transaction | TransactionError
   }
 }
 
@@ -37,7 +38,7 @@ const RestartButton = ({ children, ...rest }: ButtonProps & LinkProps) => {
 const Link = createLink(RestartButton)
 
 function RouteComponent() {
-  const state = useRouterState({ select: (s) => s.location.state })
+  const { method, type } = useRouterState({ select: (s) => s.location.state })
 
   return (
     <Stack padding={24} gap={24}>
@@ -57,10 +58,10 @@ function RouteComponent() {
         <Divider width="md" />
         <Box>
           <strong>Payment method</strong>
-          <Text>{state?.method?.name}</Text>
+          <Text>{method?.name}</Text>
         </Box>
       </Stack>
-      <Link to={`/${state?.type || ''}`}>Restart</Link>
+      <Link to={`/${type || ''}`}>Restart</Link>
     </Stack>
   )
 }

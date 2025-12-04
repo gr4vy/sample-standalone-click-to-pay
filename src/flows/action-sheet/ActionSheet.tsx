@@ -1,8 +1,5 @@
 import { Box, Text } from '@gr4vy/poutine-react'
-import { useCheckout } from '@/components/Checkout'
-import { PaymentMethods } from '@/components/PaymentMethods'
-import { SubmitButton } from '@/components/SubmitButton'
-import { User } from '@/components/User'
+import { PaymentMethods, SubmitButton, User, useCheckout } from '@/components'
 
 export const ActionSheet = () => {
   const { user } = useCheckout()

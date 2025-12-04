@@ -3,9 +3,11 @@ import { Stack } from '@gr4vy/poutine-react'
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
   type PropsWithChildren,
 } from 'react'
+import { createCheckoutSession, type CheckoutSession } from '@/utils'
 import { OrderSummary } from './OrderSummary'
 import { TopBar } from './TopBar'
 import type { UserFormState } from './User'
@@ -22,8 +24,13 @@ export const CheckoutContext = createContext<
     method: CheckoutMethod
     setMethod: (method: CheckoutMethod) => void
     setUser: (formState: UserFormState) => void
-    user?: UserFormState
+    user: UserFormState
     type: CheckoutType
+    sessionId: CheckoutSession['id']
+    isPending: boolean
+    setIsPending: (isPending: boolean) => void
+    canSubmit: boolean
+    setCanSubmit: (canSubmit: boolean) => void
   }>
 >({})
 
@@ -37,10 +44,31 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
     name: 'Click to Pay',
   })
   const [user, setUser] = useState<UserFormState>()
+  const [sessionId, setSessionId] = useState<string>()
+  const [isPending, setIsPending] = useState(false)
+  const [canSubmit, setCanSubmit] = useState(false)
+
+  useEffect(() => {
+    createCheckoutSession({
+      amount: 1299,
+      currency: 'AUD',
+    }).then((checkoutSession) => setSessionId(checkoutSession?.id))
+  }, [])
 
   return (
     <CheckoutContext.Provider
-      value={{ method, setMethod, user, setUser, type }}
+      value={{
+        method,
+        setMethod,
+        user,
+        setUser,
+        type,
+        sessionId,
+        isPending,
+        setIsPending,
+        canSubmit,
+        setCanSubmit,
+      }}
     >
       <Stack padding={24} gap={32}>
         <TopBar title="Checkout" hasBackButton />

@@ -1,6 +1,27 @@
 @import 'tailwindcss';
 @import '@gr4vy/poutine-tokens/css/theme.css';
 
+@keyframes loaderBounce {
+  0% {
+    transform: translateY(0px);
+    animation-timing-function: ease-in;
+  }
+  20% {
+    transform: translateY(-8px);
+    animation-timing-function: ease-out;
+  }
+  40% {
+    transform: translateY(0px);
+    animation-timing-function: ease;
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 @layer base {
   :root {
     @apply antialiased;
@@ -26,4 +47,15 @@
   h5 {
     @apply text-xs font-bold;
   }
+}
+
+.secure-fields__input {
+  display: inline-block;
+  border: 1px solid;
+  width: 100%;
+  height: 42px;
+}
+
+.secure-fields__input[data-secure-fields-invalid] {
+  border-color: #eb4c4b;
 }
