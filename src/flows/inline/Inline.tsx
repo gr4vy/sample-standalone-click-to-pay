@@ -5,6 +5,8 @@ import {
   Grid,
   GridItem,
   TextLink,
+  Tooltip,
+  Icon,
 } from '@gr4vy/poutine-react'
 import {
   CardForm,
@@ -40,19 +42,13 @@ const Form = ({ canSubmit }: { canSubmit: boolean }) => {
     secureFields.submit()
   }
 
-  useEffect(() => {
-    console.log('changed', user)
-    if (user) {
-      secureFields.clickToPay.signIn({
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-      })
-    }
-  }, [secureFields?.clickToPay, user])
-
   return (
     <>
-      <User />
+      <User
+        onSignIn={({ email, phoneNumber }) =>
+          secureFields.clickToPay.signIn({ email, phoneNumber })
+        }
+      />
       <form onSubmit={handleSubmit} className="space-y-8">
         <PaymentMethods>
           <Box marginTop={8}>
@@ -65,7 +61,6 @@ const Form = ({ canSubmit }: { canSubmit: boolean }) => {
               rememberMeCheckbox="#click-to-pay-remember-me-checkbox"
               learnMoreLink="#click-to-pay-learn-more-link"
               email={user?.email}
-              // email="luca@gr4vy.com"
               authenticate={{ consumer: true, checkout: true }}
             />
             <ClickToPaySignIn>
@@ -119,7 +114,15 @@ const Form = ({ canSubmit }: { canSubmit: boolean }) => {
                         className="mt-[5px]"
                       />
                       <Text margin="none" padding="none" lineHeight={20}>
-                        Remember me in this browser
+                        Remember me in this browser{' '}
+                        <Tooltip
+                          content="If you’re remembered, you won’t need to enter a code
+                          next time to securely access your saved cards. Not
+                          recommended for public or shared devices because this
+                          uses cookies."
+                        >
+                          <Icon name="info" size="small" />
+                        </Tooltip>
                       </Text>
                     </Stack>
                   </Stack>
@@ -183,9 +186,11 @@ export const Inline = () => {
           setCanSubmit?.(true)
         }
       }}
-      onClickToPayError={({ error }: { error: string }) =>
-        setError?.(new Error(error))
-      }
+      onClickToPayError={({ error }: { error: string }) => {
+        if (error !== 'USER_NOT_RECOGNIZED') {
+          setError?.(new Error(error))
+        }
+      }}
       onClickToPaySignOut={() => setUser?.({ email: '', phoneNumber: '' })}
     >
       <Form canSubmit={!!canSubmit} />
