@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Alert, Stack } from '@gr4vy/poutine-react'
+import { useNavigate } from '@tanstack/react-router'
 import {
   createContext,
   useContext,
@@ -7,7 +8,12 @@ import {
   useState,
   type PropsWithChildren,
 } from 'react'
-import { createCheckoutSession, type CheckoutSession } from '@/utils'
+import {
+  createCheckoutSession,
+  type CheckoutSession,
+  type Transaction,
+  type TransactionError,
+} from '@/utils'
 import { OrderSummary } from './OrderSummary'
 import { TopBar } from './TopBar'
 import type { UserFormState } from './User'
@@ -31,7 +37,10 @@ export const CheckoutContext = createContext<
     setIsPending: (isPending: boolean) => void
     canSubmit: boolean
     setCanSubmit: (canSubmit: boolean) => void
+    clickToPayMethod: string
+    setClickToPayMethod: (method: string) => void
     setError: (error: Error) => void
+    transactionCallback: (transaction: Transaction | TransactionError) => void
   }>
 >({})
 
@@ -40,6 +49,7 @@ export interface CheckoutProviderProps extends PropsWithChildren {
 }
 
 export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
+  const navigate = useNavigate()
   const [method, setMethod] = useState<CheckoutMethod>({
     id: 'click-to-pay',
     name: 'Click to Pay',
@@ -48,7 +58,18 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
   const [sessionId, setSessionId] = useState<string>()
   const [isPending, setIsPending] = useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
+  const [clickToPayMethod, setClickToPayMethod] = useState('')
   const [error, setError] = useState<Error>()
+
+  const transactionCallback = (transaction: Transaction | TransactionError) => {
+    setIsPending?.(false)
+    setCanSubmit?.(false)
+    if ('id' in transaction) {
+      navigate({ to: '/success', state: { method, type, transaction } })
+    } else {
+      navigate({ to: '/failure', state: { method, type, transaction } })
+    }
+  }
 
   useEffect(() => {
     createCheckoutSession({
@@ -72,7 +93,10 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
         setIsPending,
         canSubmit,
         setCanSubmit,
+        clickToPayMethod,
+        setClickToPayMethod,
         setError,
+        transactionCallback,
       }}
     >
       <Stack padding={24} gap={32}>

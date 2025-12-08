@@ -8,8 +8,7 @@ import {
   SecurityCode,
   useSecureFields,
 } from '@gr4vy/secure-fields-react'
-import { useNavigate } from '@tanstack/react-router'
-import { type MouseEvent } from 'react'
+import { useRef, useEffect, type MouseEvent } from 'react'
 import {
   CardForm,
   Divider,
@@ -118,16 +117,52 @@ const Form = ({ canSubmit }: { canSubmit: boolean }) => {
 
 export const Inline = () => {
   const {
-    method,
-    type,
     sessionId,
     canSubmit,
     setCanSubmit,
-    setIsPending,
     setError,
     setUser,
+    clickToPayMethod,
+    setClickToPayMethod,
+    transactionCallback,
   } = useCheckout()
-  const navigate = useNavigate()
+  const clickToPayMethodRef = useRef(clickToPayMethod)
+
+  const handleCardVaultSuccess = () =>
+    createTransaction({
+      amount: 1299,
+      currency: 'AUD',
+      payment_method: {
+        id: sessionId,
+        method: 'checkout-session',
+      },
+    }).then(transactionCallback)
+
+  const handleCardVaultFailure = () =>
+    setError?.(new Error('Could not vault the card'))
+
+  const handleFormChange = ({ complete }: { complete: boolean }) => {
+    if (clickToPayMethodRef.current === 'card') {
+      setCanSubmit?.(complete)
+    }
+  }
+
+  const handleMethodChange = ({ method }: { method: string }) =>
+    setClickToPayMethod?.(method)
+
+  const handleClickToPayError = ({ error }: { error: string }) => {
+    if (error !== 'USER_NOT_RECOGNIZED') {
+      setError?.(new Error(error))
+    }
+  }
+
+  const handleClickToPaySignOut = () =>
+    setUser?.({ email: '', phoneNumber: '' })
+
+  useEffect(() => {
+    clickToPayMethodRef.current = clickToPayMethod
+    setCanSubmit?.(clickToPayMethod === 'click-to-pay')
+  }, [setCanSubmit, clickToPayMethod])
 
   if (!sessionId) return null
 
@@ -137,40 +172,12 @@ export const Inline = () => {
       environment={env.VITE_GR4VY_ENVIRONMENT}
       sessionId={sessionId}
       debug
-      onCardVaultSuccess={async () => {
-        const transaction = await createTransaction({
-          amount: 1299,
-          currency: 'AUD',
-          payment_method: {
-            id: sessionId,
-            method: 'checkout-session',
-          },
-        })
-        setIsPending?.(false)
-        setCanSubmit?.(false)
-        if ('id' in transaction) {
-          navigate({ to: '/success', state: { method, type, transaction } })
-        } else {
-          navigate({ to: '/failure', state: { method, type, transaction } })
-        }
-      }}
-      onCardVaultFailure={() =>
-        setError?.(new Error('Could not vault the card'))
-      }
-      onFormChange={({ complete }: { complete: boolean }) =>
-        setCanSubmit?.(complete)
-      }
-      onMethodChange={({ method }: { method: string }) => {
-        if (method === 'click-to-pay') {
-          setCanSubmit?.(true)
-        }
-      }}
-      onClickToPayError={({ error }: { error: string }) => {
-        if (error !== 'USER_NOT_RECOGNIZED') {
-          setError?.(new Error(error))
-        }
-      }}
-      onClickToPaySignOut={() => setUser?.({ email: '', phoneNumber: '' })}
+      onCardVaultSuccess={handleCardVaultSuccess}
+      onCardVaultFailure={handleCardVaultFailure}
+      onFormChange={handleFormChange}
+      onMethodChange={handleMethodChange}
+      onClickToPayError={handleClickToPayError}
+      onClickToPaySignOut={handleClickToPaySignOut}
     >
       <Form canSubmit={!!canSubmit} />
     </SecureFields>
