@@ -31,6 +31,7 @@ export const CheckoutContext = createContext<
     setIsPending: (isPending: boolean) => void
     canSubmit: boolean
     setCanSubmit: (canSubmit: boolean) => void
+    setError: (error: Error) => void
   }>
 >({})
 
@@ -71,6 +72,7 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
         setIsPending,
         canSubmit,
         setCanSubmit,
+        setError,
       }}
     >
       <Stack padding={24} gap={32}>

@@ -122,8 +122,15 @@ const Form = ({ canSubmit }: { canSubmit: boolean }) => {
 }
 
 export const Inline = () => {
-  const { method, type, sessionId, canSubmit, setCanSubmit, setIsPending } =
-    useCheckout()
+  const {
+    method,
+    type,
+    sessionId,
+    canSubmit,
+    setCanSubmit,
+    setIsPending,
+    setError,
+  } = useCheckout()
   const navigate = useNavigate()
 
   if (!sessionId) return null
@@ -151,7 +158,17 @@ export const Inline = () => {
           navigate({ to: '/failure', state: { method, type, transaction } })
         }
       }}
-      onReady={() => setCanSubmit?.(true)}
+      onCardVaultFailure={() =>
+        setError?.(new Error('Could not vault the card'))
+      }
+      onFormChange={({ complete }: { complete: boolean }) =>
+        setCanSubmit?.(complete)
+      }
+      onMethodChange={({ method }: { method: string }) => {
+        if (method === 'click-to-pay') {
+          setCanSubmit?.(true)
+        }
+      }}
     >
       <User />
       <Form canSubmit={!!canSubmit} />
