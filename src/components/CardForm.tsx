@@ -14,7 +14,12 @@ export const FieldGroup = ({
   )
 }
 
-export const CardForm = ({ children }: PropsWithChildren) => {
+export const CardForm = ({
+  children,
+  hidden,
+}: PropsWithChildren<{ hidden?: boolean }>) => {
+  if (hidden) return null
+
   return (
     <SecureFieldsCardForm>
       <Grid rowGap={12} columnGap={12}>

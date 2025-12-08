@@ -24,11 +24,10 @@ const inputClass = 'w-full rounded-rounded py-[4px]'
 
 const Form = ({ canSubmit }: { canSubmit: boolean }) => {
   const { secureFields } = useSecureFields()
-  const { user, isPending, setIsPending } = useCheckout()
+  const { user, isPending } = useCheckout()
 
   const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsPending?.(true)
     secureFields.submit()
   }
 
@@ -52,12 +51,12 @@ const Form = ({ canSubmit }: { canSubmit: boolean }) => {
             email={user?.email}
             authenticate={{ consumer: true, checkout: true }}
           />
+          {isPending && <Loader marginBottom={12} />}
           <ClickToPaySignIn>
-            {isPending && <Loader marginBottom={12} />}
             <Text>Please log-in to access your saved cards.</Text>
             <Divider>Or enter card manually</Divider>
           </ClickToPaySignIn>
-          <CardForm>
+          <CardForm hidden={isPending}>
             <CardForm.FieldGroup gridColumn="span 12">
               <label htmlFor="cc-number">Card Number</label>
               <CardNumber className={inputClass} />
@@ -122,13 +121,21 @@ export const Inline = () => {
     setCanSubmit,
     setError,
     setUser,
+    setIsPending,
     clickToPayMethod,
     setClickToPayMethod,
     transactionCallback,
   } = useCheckout()
   const clickToPayMethodRef = useRef(clickToPayMethod)
 
-  const handleCardVaultSuccess = () =>
+  const handleClickToPayReady = ({ buyerExists }: { buyerExists: boolean }) => {
+    if (buyerExists) {
+      setUser?.({ email: '-', phoneNumber: '' })
+    }
+  }
+
+  const handleCardVaultSuccess = () => {
+    setIsPending?.(true)
     createTransaction({
       amount: 1299,
       currency: 'AUD',
@@ -137,6 +144,7 @@ export const Inline = () => {
         method: 'checkout-session',
       },
     }).then(transactionCallback)
+  }
 
   const handleCardVaultFailure = () =>
     setError?.(new Error('Could not vault the card'))
@@ -172,6 +180,7 @@ export const Inline = () => {
       environment={env.VITE_GR4VY_ENVIRONMENT}
       sessionId={sessionId}
       debug
+      onClickToPayReady={handleClickToPayReady}
       onCardVaultSuccess={handleCardVaultSuccess}
       onCardVaultFailure={handleCardVaultFailure}
       onFormChange={handleFormChange}

@@ -62,7 +62,6 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
   const [error, setError] = useState<Error>()
 
   const transactionCallback = (transaction: Transaction | TransactionError) => {
-    setIsPending?.(false)
     setCanSubmit?.(false)
     if ('id' in transaction) {
       navigate({ to: '/success', state: { method, type, transaction } })
