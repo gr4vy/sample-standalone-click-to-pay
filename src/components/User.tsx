@@ -36,9 +36,15 @@ export const User = ({ onSignIn }: UserProps) => {
   const isLoggedIn = user?.email || user?.phoneNumber
 
   useEffect(() => {
-    setUser?.(formState)
-    onSignIn?.(formState)
-  }, [formState, onSignIn, setUser])
+    if (
+      (formState.email || formState.phoneNumber) &&
+      !user?.email &&
+      !user?.phoneNumber
+    ) {
+      setUser?.(formState)
+      onSignIn?.(formState)
+    }
+  }, [formState, onSignIn, setUser, user])
 
   return (
     <form action={formAction}>
