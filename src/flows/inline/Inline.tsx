@@ -19,7 +19,7 @@ import {
   useSecureFields,
 } from '@gr4vy/secure-fields-react'
 import { useNavigate } from '@tanstack/react-router'
-import { useEffect, type MouseEvent } from 'react'
+import { type MouseEvent } from 'react'
 import {
   Divider,
   Loader,
