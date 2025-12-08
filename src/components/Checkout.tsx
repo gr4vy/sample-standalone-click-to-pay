@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Stack } from '@gr4vy/poutine-react'
+import { Alert, Stack } from '@gr4vy/poutine-react'
 import {
   createContext,
   useContext,
@@ -47,12 +47,15 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
   const [sessionId, setSessionId] = useState<string>()
   const [isPending, setIsPending] = useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
+  const [error, setError] = useState<Error>()
 
   useEffect(() => {
     createCheckoutSession({
       amount: 1299,
       currency: 'AUD',
-    }).then((checkoutSession) => setSessionId(checkoutSession?.id))
+    })
+      .then((checkoutSession) => setSessionId(checkoutSession?.id))
+      .catch(setError)
   }, [])
 
   return (
@@ -73,6 +76,11 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
       <Stack padding={24} gap={32}>
         <TopBar title="Checkout" hasBackButton />
         <OrderSummary />
+        {error && (
+          <Alert gap={16} variant="negative" paddingX={16} paddingY={8}>
+            <Alert.Text>Error: {error.message}</Alert.Text>
+          </Alert>
+        )}
         {children}
       </Stack>
     </CheckoutContext.Provider>
