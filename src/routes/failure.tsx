@@ -11,12 +11,11 @@ import {
   useRouterState,
   type LinkProps,
 } from '@tanstack/react-router'
-import { TopBar, type CheckoutMethod, type CheckoutType } from '@/components'
+import { TopBar, type CheckoutType } from '@/components'
 import type { Transaction, TransactionError } from '@/utils'
 
 declare module '@tanstack/react-router' {
   interface HistoryState {
-    method?: CheckoutMethod
     type?: CheckoutType
     transaction?: Transaction | TransactionError
   }
