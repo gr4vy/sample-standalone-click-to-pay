@@ -10,7 +10,7 @@ export const Overlay = () => {
       <PaymentMethods>
         <Box marginTop={8}>
           <Text>overlay UX flow content</Text>
-          <Text>{user?.email || user?.phoneNumber}</Text>
+          <Text>{user?.email || user?.mobileNumber}</Text>
         </Box>
       </PaymentMethods>
       <SubmitButton />

@@ -24,7 +24,7 @@ const inputClass = 'w-full rounded-rounded py-[4px]'
 
 const Form = ({ canSubmit }: { canSubmit: boolean }) => {
   const { secureFields } = useSecureFields()
-  const { user, isPending } = useCheckout()
+  const { user, setUser, isPending } = useCheckout()
 
   const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -34,9 +34,15 @@ const Form = ({ canSubmit }: { canSubmit: boolean }) => {
   return (
     <>
       <User
-        onSignIn={({ email, phoneNumber }) =>
-          secureFields.clickToPay.signIn({ email, phoneNumber })
-        }
+        onSignIn={(payload) => {
+          secureFields.clickToPay.signIn(payload)
+          setUser?.(payload)
+        }}
+        onSignOut={() => {
+          document.cookie = `recognitionToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;` // NOTE: workaround until we have a fix in Secure Fields
+          secureFields.clickToPay.signOut()
+          setUser?.({ email: '', mobileNumber: '' })
+        }}
       />
       <form onSubmit={handleSubmit} className="space-y-8">
         <PaymentMethods>
@@ -120,6 +126,7 @@ export const Inline = () => {
     canSubmit,
     setCanSubmit,
     setError,
+    user,
     setUser,
     setIsPending,
     clickToPayMethod,
@@ -127,12 +134,6 @@ export const Inline = () => {
     transactionCallback,
   } = useCheckout()
   const clickToPayMethodRef = useRef(clickToPayMethod)
-
-  const handleClickToPayReady = ({ buyerExists }: { buyerExists: boolean }) => {
-    if (buyerExists) {
-      setUser?.({ email: '-', phoneNumber: '' })
-    }
-  }
 
   const handleCardVaultSuccess = () => {
     setIsPending?.(true)
@@ -165,12 +166,12 @@ export const Inline = () => {
   }
 
   const handleClickToPaySignOut = () =>
-    setUser?.({ email: '', phoneNumber: '' })
+    setUser?.({ email: '', mobileNumber: '' })
 
   useEffect(() => {
     clickToPayMethodRef.current = clickToPayMethod
     setCanSubmit?.(clickToPayMethod === 'click-to-pay')
-  }, [setCanSubmit, clickToPayMethod])
+  }, [setCanSubmit, clickToPayMethod, user])
 
   if (!sessionId) return null
 
@@ -180,7 +181,6 @@ export const Inline = () => {
       environment={env.VITE_GR4VY_ENVIRONMENT}
       sessionId={sessionId}
       debug
-      onClickToPayReady={handleClickToPayReady}
       onCardVaultSuccess={handleCardVaultSuccess}
       onCardVaultFailure={handleCardVaultFailure}
       onFormChange={handleFormChange}
