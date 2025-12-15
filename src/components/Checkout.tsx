@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Alert, Stack } from '@gr4vy/poutine-react'
+import { Stack } from '@gr4vy/poutine-react'
 import { useNavigate } from '@tanstack/react-router'
 import {
   createContext,
@@ -14,6 +14,7 @@ import {
   type Transaction,
   type TransactionError,
 } from '@/utils'
+import { ErrorAlert } from './ErrorAlert'
 import { OrderSummary } from './OrderSummary'
 import { TopBar } from './TopBar'
 import type { UserFormState } from './User'
@@ -28,7 +29,7 @@ export type CheckoutMethod = {
 export const CheckoutContext = createContext<
   Partial<{
     method: CheckoutMethod
-    setMethod: (method: CheckoutMethod) => void
+    setMethod: (method?: CheckoutMethod) => void
     setUser: (formState: UserFormState) => void
     user: UserFormState
     type: CheckoutType
@@ -37,8 +38,11 @@ export const CheckoutContext = createContext<
     setIsPending: (isPending: boolean) => void
     canSubmit: boolean
     setCanSubmit: (canSubmit: boolean) => void
+    isSubmitBtnHidden: boolean
+    setIsSubmitBtnHidden: (isSubmitBtnHidden: boolean) => void
     clickToPayMethod: string
     setClickToPayMethod: (method: string) => void
+    error: Error
     setError: (error: Error) => void
     transactionCallback: (transaction: Transaction | TransactionError) => void
     transactionErrorCallback: (error: Error) => void
@@ -56,6 +60,7 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
   const [sessionId, setSessionId] = useState<string>()
   const [isPending, setIsPending] = useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
+  const [isSubmitBtnHidden, setIsSubmitBtnHidden] = useState(true)
   const [clickToPayMethod, setClickToPayMethod] = useState('')
   const [error, setError] = useState<Error>()
 
@@ -103,8 +108,11 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
         setIsPending,
         canSubmit,
         setCanSubmit,
+        isSubmitBtnHidden,
+        setIsSubmitBtnHidden,
         clickToPayMethod,
         setClickToPayMethod,
+        error,
         setError,
         transactionCallback,
         transactionErrorCallback,
@@ -112,11 +120,7 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
     >
       <Stack padding={24} gap={32}>
         <TopBar title="Checkout" hasBackButton />
-        {error && (
-          <Alert gap={16} variant="negative" paddingX={16} paddingY={8}>
-            <Alert.Text>Error: {error.message}</Alert.Text>
-          </Alert>
-        )}
+        <ErrorAlert error={error} />
         <OrderSummary />
         {children}
       </Stack>
