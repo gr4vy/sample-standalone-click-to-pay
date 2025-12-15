@@ -44,7 +44,7 @@ const RestartButton = ({ children, ...rest }: ButtonProps & LinkProps) => {
 const Link = createLink(RestartButton)
 
 function RouteComponent() {
-  const { method, type, transaction } = useRouterState({
+  const { user, type, transaction } = useRouterState({
     select: (s) => s.location.state,
   })
 
@@ -60,13 +60,13 @@ function RouteComponent() {
       <Stack borderWidth="md" borderColor="gray30" gap={12} padding={12}>
         <Box>
           <strong>User</strong>
-          <Text>john.doe@example.com</Text>
-          <Text>+1 (123) 456-7890</Text>
+          <Text>{user?.email}</Text>
+          <Text>{user?.mobileNumber}</Text>
         </Box>
         <Divider width="md" />
         <Box>
           <strong>Payment method</strong>
-          <Text>{method?.name}</Text>
+          <Text>Click to Pay</Text>
         </Box>
       </Stack>
       <Link to={`/${type || ''}`}>Restart</Link>

@@ -1,6 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Alert, Stack } from '@gr4vy/poutine-react'
-import { useSecureFields } from '@gr4vy/secure-fields-react'
 import { useNavigate } from '@tanstack/react-router'
 import {
   createContext,
@@ -42,6 +41,7 @@ export const CheckoutContext = createContext<
     setClickToPayMethod: (method: string) => void
     setError: (error: Error) => void
     transactionCallback: (transaction: Transaction | TransactionError) => void
+    transactionErrorCallback: (error: Error) => void
   }>
 >({})
 
@@ -64,11 +64,21 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
     if ('id' in transaction) {
       navigate({
         to: '/success',
-        state: { method, user, type, transaction },
+        state: { user, type, transaction },
       })
     } else {
       navigate({ to: '/failure', state: { type, transaction } })
     }
+  }
+
+  const transactionErrorCallback = (error: Error) => {
+    navigate({
+      to: '/failure',
+      state: {
+        type,
+        transaction: { status: '500', message: error.message },
+      },
+    })
   }
 
   useEffect(() => {
@@ -97,6 +107,7 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
         setClickToPayMethod,
         setError,
         transactionCallback,
+        transactionErrorCallback,
       }}
     >
       <Stack padding={24} gap={32}>

@@ -7,7 +7,7 @@ import {
   SecurityCode,
   useSecureFields,
 } from '@gr4vy/secure-fields-react'
-import { useNavigate, useRouter } from '@tanstack/react-router'
+import { useRouter } from '@tanstack/react-router'
 import { useRef, useEffect, type MouseEvent, memo } from 'react'
 import {
   CardForm,
@@ -22,13 +22,12 @@ const inputClass = 'w-full rounded-rounded py-[4px]'
 
 const SecureFields = memo(
   SecureFieldsReact,
-  (prevProps, nextProps) =>
-    JSON.stringify(prevProps.config) === JSON.stringify(nextProps.config)
+  (prevProps, nextProps) => prevProps.sessionId === nextProps.sessionId
 )
 
-const Form = ({ canSubmit }: { canSubmit: boolean }) => {
+const Form = () => {
   const { secureFields } = useSecureFields()
-  const { user, isPending } = useCheckout()
+  const { canSubmit, user, isPending } = useCheckout()
 
   const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -109,10 +108,8 @@ const Form = ({ canSubmit }: { canSubmit: boolean }) => {
 
 export const Inline = () => {
   const router = useRouter()
-  const navigate = useNavigate()
   const {
     sessionId,
-    canSubmit,
     setCanSubmit,
     setError,
     user,
@@ -121,7 +118,7 @@ export const Inline = () => {
     clickToPayMethod,
     setClickToPayMethod,
     transactionCallback,
-    type,
+    transactionErrorCallback,
   } = useCheckout()
   const clickToPayMethodRef = useRef(clickToPayMethod)
 
@@ -136,15 +133,7 @@ export const Inline = () => {
       },
     })
       .then(transactionCallback)
-      .catch((error) => {
-        navigate({
-          to: '/failure',
-          state: {
-            type,
-            transaction: { status: '500', message: error.message },
-          },
-        })
-      })
+      .catch(transactionErrorCallback)
   }
 
   const handleCardVaultFailure = () =>
@@ -190,7 +179,7 @@ export const Inline = () => {
       onClickToPayError={handleClickToPayError}
       onClickToPaySignOut={handleClickToPaySignOut}
     >
-      <Form canSubmit={!!canSubmit} />
+      <Form />
     </SecureFields>
   )
 }
