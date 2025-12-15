@@ -14,11 +14,11 @@
   "dependencies": {
     "@gr4vy/poutine-react": "3.0.2--canary.526.4535b2b.0",
     "@gr4vy/poutine-tokens": "^0.24.0",
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-router": "^1.139.12",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
