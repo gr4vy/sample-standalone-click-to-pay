@@ -1,14 +1,14 @@
 import { TextLink, Heading, Divider, Box } from '@gr4vy/poutine-react'
-import { createLink } from '@tanstack/react-router'
+import { useRouter } from '@tanstack/react-router'
 
 export interface TopBarProps {
   title: string
   hasBackButton?: boolean
 }
 
-const Link = createLink(TextLink)
-
 export const TopBar = ({ title, hasBackButton }: TopBarProps) => {
+  const router = useRouter()
+
   return (
     <Box width="full">
       <Box
@@ -21,9 +21,13 @@ export const TopBar = ({ title, hasBackButton }: TopBarProps) => {
       >
         <Box>
           {hasBackButton && (
-            <Link to="/" className="p-1.5">
+            <TextLink
+              href="#"
+              onClick={() => router.history.back()}
+              className="p-1.5"
+            >
               Back
-            </Link>
+            </TextLink>
           )}
         </Box>
         <Box textAlign="center">

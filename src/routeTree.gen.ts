@@ -15,6 +15,8 @@ import { Route as InlineRouteImport } from './routes/inline'
 import { Route as FailureRouteImport } from './routes/failure'
 import { Route as ActionSheetRouteImport } from './routes/action-sheet'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InlineProfileRouteImport } from './routes/inline/profile'
+import { Route as InlinePaymentRouteImport } from './routes/inline/payment'
 
 const SuccessRoute = SuccessRouteImport.update({
   id: '/success',
@@ -46,31 +48,47 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InlineProfileRoute = InlineProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => InlineRoute,
+} as any)
+const InlinePaymentRoute = InlinePaymentRouteImport.update({
+  id: '/payment',
+  path: '/payment',
+  getParentRoute: () => InlineRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/action-sheet': typeof ActionSheetRoute
   '/failure': typeof FailureRoute
-  '/inline': typeof InlineRoute
+  '/inline': typeof InlineRouteWithChildren
   '/overlay': typeof OverlayRoute
   '/success': typeof SuccessRoute
+  '/inline/payment': typeof InlinePaymentRoute
+  '/inline/profile': typeof InlineProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/action-sheet': typeof ActionSheetRoute
   '/failure': typeof FailureRoute
-  '/inline': typeof InlineRoute
+  '/inline': typeof InlineRouteWithChildren
   '/overlay': typeof OverlayRoute
   '/success': typeof SuccessRoute
+  '/inline/payment': typeof InlinePaymentRoute
+  '/inline/profile': typeof InlineProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/action-sheet': typeof ActionSheetRoute
   '/failure': typeof FailureRoute
-  '/inline': typeof InlineRoute
+  '/inline': typeof InlineRouteWithChildren
   '/overlay': typeof OverlayRoute
   '/success': typeof SuccessRoute
+  '/inline/payment': typeof InlinePaymentRoute
+  '/inline/profile': typeof InlineProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,8 +99,18 @@ export interface FileRouteTypes {
     | '/inline'
     | '/overlay'
     | '/success'
+    | '/inline/payment'
+    | '/inline/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/action-sheet' | '/failure' | '/inline' | '/overlay' | '/success'
+  to:
+    | '/'
+    | '/action-sheet'
+    | '/failure'
+    | '/inline'
+    | '/overlay'
+    | '/success'
+    | '/inline/payment'
+    | '/inline/profile'
   id:
     | '__root__'
     | '/'
@@ -91,13 +119,15 @@ export interface FileRouteTypes {
     | '/inline'
     | '/overlay'
     | '/success'
+    | '/inline/payment'
+    | '/inline/profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActionSheetRoute: typeof ActionSheetRoute
   FailureRoute: typeof FailureRoute
-  InlineRoute: typeof InlineRoute
+  InlineRoute: typeof InlineRouteWithChildren
   OverlayRoute: typeof OverlayRoute
   SuccessRoute: typeof SuccessRoute
 }
@@ -146,14 +176,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inline/profile': {
+      id: '/inline/profile'
+      path: '/profile'
+      fullPath: '/inline/profile'
+      preLoaderRoute: typeof InlineProfileRouteImport
+      parentRoute: typeof InlineRoute
+    }
+    '/inline/payment': {
+      id: '/inline/payment'
+      path: '/payment'
+      fullPath: '/inline/payment'
+      preLoaderRoute: typeof InlinePaymentRouteImport
+      parentRoute: typeof InlineRoute
+    }
   }
 }
+
+interface InlineRouteChildren {
+  InlinePaymentRoute: typeof InlinePaymentRoute
+  InlineProfileRoute: typeof InlineProfileRoute
+}
+
+const InlineRouteChildren: InlineRouteChildren = {
+  InlinePaymentRoute: InlinePaymentRoute,
+  InlineProfileRoute: InlineProfileRoute,
+}
+
+const InlineRouteWithChildren =
+  InlineRoute._addFileChildren(InlineRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActionSheetRoute: ActionSheetRoute,
   FailureRoute: FailureRoute,
-  InlineRoute: InlineRoute,
+  InlineRoute: InlineRouteWithChildren,
   OverlayRoute: OverlayRoute,
   SuccessRoute: SuccessRoute,
 }

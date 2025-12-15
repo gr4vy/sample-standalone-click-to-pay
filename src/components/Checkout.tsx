@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Alert, Stack } from '@gr4vy/poutine-react'
+import { useSecureFields } from '@gr4vy/secure-fields-react'
 import { useNavigate } from '@tanstack/react-router'
 import {
   createContext,
@@ -50,10 +51,7 @@ export interface CheckoutProviderProps extends PropsWithChildren {
 
 export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
   const navigate = useNavigate()
-  const [method, setMethod] = useState<CheckoutMethod>({
-    id: 'click-to-pay',
-    name: 'Click to Pay',
-  })
+  const [method, setMethod] = useState<CheckoutMethod | undefined>()
   const [user, setUser] = useState<UserFormState>()
   const [sessionId, setSessionId] = useState<string>()
   const [isPending, setIsPending] = useState(false)
@@ -103,12 +101,12 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
     >
       <Stack padding={24} gap={32}>
         <TopBar title="Checkout" hasBackButton />
-        <OrderSummary />
         {error && (
           <Alert gap={16} variant="negative" paddingX={16} paddingY={8}>
             <Alert.Text>Error: {error.message}</Alert.Text>
           </Alert>
         )}
+        <OrderSummary />
         {children}
       </Stack>
     </CheckoutContext.Provider>

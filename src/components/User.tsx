@@ -1,35 +1,34 @@
 import { Button, Input, Stack, Text } from '@gr4vy/poutine-react'
+import { useLocation, useNavigate } from '@tanstack/react-router'
 import { useState, type FormEvent } from 'react'
 import { useCheckout } from './Checkout'
-
-export interface UserProps {
-  onSignIn?: (formState: UserFormState) => void
-  onSignOut?: () => void
-}
 
 export type UserFormState = {
   email: string
   mobileNumber: string
 }
 
-export const User = ({ onSignIn, onSignOut }: UserProps) => {
+export const User = () => {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [mobileNumber, setMobileNumber] = useState('')
-  const { user } = useCheckout()
+  const { user, setUser } = useCheckout()
   const isLoggedIn = user?.email || user?.mobileNumber
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (isLoggedIn) {
-      onSignOut?.()
-    } else {
-      onSignIn?.({ email, mobileNumber })
+    if (!isLoggedIn) {
+      setUser?.({ email, mobileNumber })
     }
+
+    const parentPath = pathname.substring(0, pathname.lastIndexOf('/'))
+    navigate({ to: `${parentPath}/payment` })
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="space-y-16">
       <Stack gap={12}>
         <Text as="h2">Profile</Text>
         {isLoggedIn ? (
@@ -50,8 +49,8 @@ export const User = ({ onSignIn, onSignOut }: UserProps) => {
             />
           </>
         )}
-        <Button size="small">{isLoggedIn ? 'Log-out' : 'Log-in'}</Button>
       </Stack>
+      <Button size="small">Continue</Button>
     </form>
   )
 }

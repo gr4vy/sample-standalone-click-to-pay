@@ -1,4 +1,5 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import '@gr4vy/poutine-react/dist/poutine-react.css'
 import './index.css'
@@ -13,5 +14,7 @@ declare module '@tanstack/react-router' {
 }
 
 createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router} />
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
 )

@@ -2,29 +2,33 @@ import { Stack, Text, TextLink, Tooltip, Icon } from '@gr4vy/poutine-react'
 import {
   CardNumber,
   ClickToPay,
-  ClickToPaySignIn,
   ExpiryDate,
-  SecureFields,
+  SecureFields as SecureFieldsReact,
   SecurityCode,
   useSecureFields,
 } from '@gr4vy/secure-fields-react'
-import { useRef, useEffect, type MouseEvent } from 'react'
+import { useNavigate, useRouter } from '@tanstack/react-router'
+import { useRef, useEffect, type MouseEvent, memo } from 'react'
 import {
   CardForm,
-  Divider,
   Loader,
   PaymentMethods,
   SubmitButton,
-  User,
   useCheckout,
 } from '@/components'
 import { createTransaction, env } from '@/utils'
 
 const inputClass = 'w-full rounded-rounded py-[4px]'
 
+const SecureFields = memo(
+  SecureFieldsReact,
+  (prevProps, nextProps) =>
+    JSON.stringify(prevProps.config) === JSON.stringify(nextProps.config)
+)
+
 const Form = ({ canSubmit }: { canSubmit: boolean }) => {
   const { secureFields } = useSecureFields()
-  const { user, setUser, isPending } = useCheckout()
+  const { user, isPending } = useCheckout()
 
   const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -32,95 +36,80 @@ const Form = ({ canSubmit }: { canSubmit: boolean }) => {
   }
 
   return (
-    <>
-      <User
-        onSignIn={(payload) => {
-          secureFields.clickToPay.signIn(payload)
-          setUser?.(payload)
-        }}
-        onSignOut={() => {
-          document.cookie = `recognitionToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;` // NOTE: workaround until we have a fix in Secure Fields
-          secureFields.clickToPay.signOut()
-          setUser?.({ email: '', mobileNumber: '' })
-        }}
-      />
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <PaymentMethods>
-          <ClickToPay
-            srcDpaId={env.VITE_SRC_DPA_ID}
-            dpaName={env.VITE_DPA_NAME}
-            dpaLocale="en_AU"
-            cardBrands={['mastercard', 'visa', 'amex']}
-            consentCheckbox="#click-to-pay-consent-checkbox"
-            rememberMeCheckbox="#click-to-pay-remember-me-checkbox"
-            learnMoreLink="#click-to-pay-learn-more-link"
-            email={user?.email}
-            authenticate={{ consumer: true, checkout: true }}
-          />
-          {isPending && <Loader marginBottom={12} />}
-          <ClickToPaySignIn>
-            <Text>Please log-in to access your saved cards.</Text>
-            <Divider>Or enter card manually</Divider>
-          </ClickToPaySignIn>
-          <CardForm hidden={isPending}>
-            <CardForm.FieldGroup gridColumn="span 12">
-              <label htmlFor="cc-number">Card Number</label>
-              <CardNumber className={inputClass} />
-            </CardForm.FieldGroup>
-            <CardForm.FieldGroup gridColumn="span 6">
-              <label htmlFor="cc-expiry-date">Expiry Date</label>
-              <ExpiryDate className={inputClass} />
-            </CardForm.FieldGroup>
-            <CardForm.FieldGroup gridColumn="span 6">
-              <label htmlFor="cc-security-code">Security Code</label>
-              <SecurityCode className={inputClass} />
-            </CardForm.FieldGroup>
-            <CardForm.FieldGroup gridColumn="span 12" gap={12} marginTop={12}>
-              <Stack direction="row" alignItems="flex-start" gap={8}>
-                <input
-                  type="checkbox"
-                  id="click-to-pay-consent-checkbox"
-                  className="mt-[5px]"
-                />
-                <label htmlFor="click-to-pay-consent-checkbox">
-                  Save my information with Mastercard{' '}
-                  <TextLink
-                    href="javascript:void(0)"
-                    id="click-to-pay-learn-more-link"
-                  >
-                    Click to Pay
-                  </TextLink>{' '}
-                  for fast, secure checkout
-                </label>
-              </Stack>
-              <Stack direction="row" alignItems="flex-start" gap={8}>
-                <input
-                  type="checkbox"
-                  id="click-to-pay-remember-me-checkbox"
-                  className="mt-[5px]"
-                />
-                <Text margin="none" padding="none" lineHeight={20}>
-                  Remember me in this browser{' '}
-                  <Tooltip
-                    content="If you’re remembered, you won’t need to enter a code
+    <form onSubmit={handleSubmit} className="space-y-24">
+      <PaymentMethods>
+        <ClickToPay
+          srcDpaId={env.VITE_SRC_DPA_ID}
+          dpaName={env.VITE_DPA_NAME}
+          dpaLocale="en_AU"
+          cardBrands={['mastercard', 'visa', 'amex']}
+          consentCheckbox="#click-to-pay-consent-checkbox"
+          rememberMeCheckbox="#click-to-pay-remember-me-checkbox"
+          learnMoreLink="#click-to-pay-learn-more-link"
+          email={user?.email}
+          authenticate={{ consumer: true, checkout: true }}
+        />
+        {isPending && <Loader marginBottom={12} />}
+        <CardForm hidden={isPending}>
+          <CardForm.FieldGroup gridColumn="span 12">
+            <label htmlFor="cc-number">Card Number</label>
+            <CardNumber className={inputClass} />
+          </CardForm.FieldGroup>
+          <CardForm.FieldGroup gridColumn="span 6">
+            <label htmlFor="cc-expiry-date">Expiry Date</label>
+            <ExpiryDate className={inputClass} />
+          </CardForm.FieldGroup>
+          <CardForm.FieldGroup gridColumn="span 6">
+            <label htmlFor="cc-security-code">Security Code</label>
+            <SecurityCode className={inputClass} />
+          </CardForm.FieldGroup>
+          <CardForm.FieldGroup gridColumn="span 12" gap={12} marginTop={12}>
+            <Stack direction="row" alignItems="flex-start" gap={8}>
+              <input
+                type="checkbox"
+                id="click-to-pay-consent-checkbox"
+                className="mt-[5px]"
+              />
+              <label htmlFor="click-to-pay-consent-checkbox">
+                Save my information with Mastercard{' '}
+                <TextLink
+                  href="javascript:void(0)"
+                  id="click-to-pay-learn-more-link"
+                >
+                  Click to Pay
+                </TextLink>{' '}
+                for fast, secure checkout
+              </label>
+            </Stack>
+            <Stack direction="row" alignItems="flex-start" gap={8}>
+              <input
+                type="checkbox"
+                id="click-to-pay-remember-me-checkbox"
+                className="mt-[5px]"
+              />
+              <Text margin="none" padding="none" lineHeight={20}>
+                Remember me in this browser{' '}
+                <Tooltip
+                  content="If you’re remembered, you won’t need to enter a code
                           next time to securely access your saved cards. Not
                           recommended for public or shared devices because this
                           uses cookies."
-                  >
-                    <Icon name="info" size="small" />
-                  </Tooltip>
-                </Text>
-              </Stack>
-            </CardForm.FieldGroup>
-          </CardForm>
-        </PaymentMethods>
-        <SubmitButton disabled={!canSubmit} loading={isPending} />
-      </form>
-    </>
+                >
+                  <Icon name="info" size="small" />
+                </Tooltip>
+              </Text>
+            </Stack>
+          </CardForm.FieldGroup>
+        </CardForm>
+      </PaymentMethods>
+      <SubmitButton disabled={!canSubmit} loading={isPending} />
+    </form>
   )
 }
 
 export const Inline = () => {
+  const router = useRouter()
+  const navigate = useNavigate()
   const {
     sessionId,
     canSubmit,
@@ -132,6 +121,7 @@ export const Inline = () => {
     clickToPayMethod,
     setClickToPayMethod,
     transactionCallback,
+    type,
   } = useCheckout()
   const clickToPayMethodRef = useRef(clickToPayMethod)
 
@@ -144,7 +134,17 @@ export const Inline = () => {
         id: sessionId,
         method: 'checkout-session',
       },
-    }).then(transactionCallback)
+    })
+      .then(transactionCallback)
+      .catch((error) => {
+        navigate({
+          to: '/failure',
+          state: {
+            type,
+            transaction: { status: '500', message: error.message },
+          },
+        })
+      })
   }
 
   const handleCardVaultFailure = () =>
@@ -165,8 +165,10 @@ export const Inline = () => {
     }
   }
 
-  const handleClickToPaySignOut = () =>
+  const handleClickToPaySignOut = () => {
     setUser?.({ email: '', mobileNumber: '' })
+    router.history.back()
+  }
 
   useEffect(() => {
     clickToPayMethodRef.current = clickToPayMethod
