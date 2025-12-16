@@ -189,6 +189,7 @@ export const Overlay = () => {
 
   const handleClickToPaySignOut = () => {
     setUser?.({ email: '', mobileNumber: '' })
+    setIsSubmitBtnHidden?.(true)
     router.history.back()
   }
 
