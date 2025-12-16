@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Checkout } from '@/components/Checkout'
-import { Inline as Component } from '@/flows'
+import { Checkout } from '@/components'
+import { Overlay as Component } from '@/flows'
 
 export const Route = createFileRoute('/overlay')({
   component: Overlay,

@@ -1,8 +1,5 @@
 import { Box, Text } from '@gr4vy/poutine-react'
-import { useCheckout } from '@/components/Checkout'
-import { PaymentMethods } from '@/components/PaymentMethods'
-import { SubmitButton } from '@/components/SubmitButton'
-import { User } from '@/components/User'
+import { PaymentMethods, SubmitButton, User, useCheckout } from '@/components'
 
 export const Overlay = () => {
   const { user } = useCheckout()
@@ -13,7 +10,7 @@ export const Overlay = () => {
       <PaymentMethods>
         <Box marginTop={8}>
           <Text>overlay UX flow content</Text>
-          <Text>{user?.email || user?.phoneNumber}</Text>
+          <Text>{user?.email || user?.mobileNumber}</Text>
         </Box>
       </PaymentMethods>
       <SubmitButton />

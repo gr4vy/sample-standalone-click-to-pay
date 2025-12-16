@@ -22,7 +22,7 @@ const PaymentMethod = ({
       onClick={() => onClick(id, name)}
     >
       <strong>{name}</strong>
-      <Box hidden={active !== id}>{children}</Box>
+      {active === id && <Box>{children}</Box>}
     </li>
   )
 }

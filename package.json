@@ -4,16 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "VITE_TOKEN=$(yarn --silent token) vite",
     "build": "tsc -b && vite build",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "token": "node scripts/generate-token.cjs"
   },
   "dependencies": {
     "@gr4vy/poutine-react": "3.0.2--canary.526.4535b2b.0",
     "@gr4vy/poutine-tokens": "^0.24.0",
+    "@gr4vy/secure-fields-react": "^2.2.0",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-router": "^1.139.12",
     "react": "^19.2.3",
@@ -22,11 +24,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@gr4vy/sdk": "^1.8.0",
     "@tanstack/router-plugin": "^1.139.12",
     "@types/node": "^24.10.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.2.2",
+    "dotenv": "^17.2.3",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
