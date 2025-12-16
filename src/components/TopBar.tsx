@@ -1,5 +1,5 @@
 import { TextLink, Heading, Divider, Box } from '@gr4vy/poutine-react'
-import { useRouter } from '@tanstack/react-router'
+import { useCanGoBack, useNavigate, useRouter } from '@tanstack/react-router'
 
 export interface TopBarProps {
   title: string
@@ -8,6 +8,15 @@ export interface TopBarProps {
 
 export const TopBar = ({ title, hasBackButton }: TopBarProps) => {
   const router = useRouter()
+  const canGoBack = useCanGoBack()
+  const navigate = useNavigate()
+
+  const handleBackClick = () => {
+    if (canGoBack) {
+      return router.history.back()
+    }
+    return navigate({ to: '/' })
+  }
 
   return (
     <Box width="full">
@@ -21,11 +30,7 @@ export const TopBar = ({ title, hasBackButton }: TopBarProps) => {
       >
         <Box>
           {hasBackButton && (
-            <TextLink
-              href="#"
-              onClick={() => router.history.back()}
-              className="p-1.5"
-            >
+            <TextLink href="#" onClick={handleBackClick} className="p-1.5">
               Back
             </TextLink>
           )}
