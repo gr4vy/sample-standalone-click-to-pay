@@ -1,6 +1,6 @@
 import { Box, Stack, Text } from '@gr4vy/poutine-react'
-import { useState, type PropsWithChildren } from 'react'
-import type { UserFormState } from './User'
+import { type PropsWithChildren } from 'react'
+import { useCheckout } from './Checkout'
 
 export interface PaymentMethodProps extends PropsWithChildren {
   active?: string
@@ -22,27 +22,16 @@ const PaymentMethod = ({
       onClick={() => onClick(id, name)}
     >
       <strong>{name}</strong>
-      <Box hidden={active !== id}>{children}</Box>
+      {active === id && <Box>{children}</Box>}
     </li>
   )
 }
 
-export interface PaymentMethodsProps {
-  checkoutType: 'inline' | 'overlay' | 'action-sheet'
-  user?: UserFormState
-  onClick: (id: string) => void
-}
-
-export const PaymentMethods = ({
-  checkoutType,
-  user,
-  onClick,
-}: PaymentMethodsProps) => {
-  const [active, setActive] = useState('click-to-pay')
+export const PaymentMethods = ({ children }: PropsWithChildren) => {
+  const { method, setMethod } = useCheckout()
 
   const handleOnClick = (id: string, name: string) => {
-    setActive(id)
-    onClick(name)
+    setMethod?.({ id, name })
   }
 
   return (
@@ -52,24 +41,21 @@ export const PaymentMethods = ({
         <PaymentMethod
           id="click-to-pay"
           name="Click to Pay"
-          active={active}
+          active={method?.id}
           onClick={handleOnClick}
         >
-          <Box marginTop={8}>
-            <Text>{checkoutType} UX flow content</Text>
-            <Text>{user?.email || user?.phoneNumber}</Text>
-          </Box>
+          {children}
         </PaymentMethod>
         <PaymentMethod
           id="card"
           name="Card"
-          active={active}
+          active={method?.id}
           onClick={handleOnClick}
         />
         <PaymentMethod
           id="paypal"
           name="PayPal"
-          active={active}
+          active={method?.id}
           onClick={handleOnClick}
         />
       </ul>

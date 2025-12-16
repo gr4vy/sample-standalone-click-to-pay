@@ -1,0 +1,19 @@
+import { Box, Text } from '@gr4vy/poutine-react'
+import { PaymentMethods, SubmitButton, User, useCheckout } from '@/components'
+
+export const ActionSheet = () => {
+  const { user } = useCheckout()
+
+  return (
+    <>
+      <User />
+      <PaymentMethods>
+        <Box marginTop={8}>
+          <Text>action-sheet UX flow content</Text>
+          <Text>{user?.email || user?.mobileNumber}</Text>
+        </Box>
+      </PaymentMethods>
+      <SubmitButton />
+    </>
+  )
+}

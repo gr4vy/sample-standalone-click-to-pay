@@ -1,56 +1,56 @@
 import { Button, Input, Stack, Text } from '@gr4vy/poutine-react'
-import { useActionState, useEffect } from 'react'
-
-export interface UserProps {
-  onSignIn: (formState: UserFormState) => void
-}
+import { useLocation, useNavigate } from '@tanstack/react-router'
+import { useState, type FormEvent } from 'react'
+import { useCheckout } from './Checkout'
 
 export type UserFormState = {
   email: string
-  phoneNumber: string
+  mobileNumber: string
 }
 
-const defaultState: UserFormState = {
-  email: '',
-  phoneNumber: '',
-}
+export const User = () => {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  const { user, setUser } = useCheckout()
+  const isLoggedIn = user?.email || user?.mobileNumber
 
-const submit = async (
-  prevState: UserFormState,
-  formData: FormData
-): Promise<UserFormState> => {
-  const fde = formData.entries()
-  const payload = Object.fromEntries(fde) as UserFormState
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
 
-  if (prevState.email || prevState.phoneNumber) {
-    return defaultState
+    if (!isLoggedIn) {
+      setUser?.({ email, mobileNumber })
+    }
+
+    const parentPath = pathname.substring(0, pathname.lastIndexOf('/'))
+    navigate({ to: `${parentPath}/payment` })
   }
 
-  return payload
-}
-
-export const User = ({ onSignIn }: UserProps) => {
-  const [formState, formAction] = useActionState(submit, defaultState)
-  const isLoggedIn = formState?.email || formState?.phoneNumber
-
-  useEffect(() => {
-    onSignIn(formState)
-  }, [formState, onSignIn])
-
   return (
-    <form action={formAction}>
+    <form onSubmit={handleSubmit} className="space-y-16">
       <Stack gap={12}>
         <Text as="h2">Profile</Text>
         {isLoggedIn ? (
-          <>Logged-in as {formState.email || formState.phoneNumber}</>
+          <>Logged-in {user.email || user.mobileNumber}</>
         ) : (
           <>
-            <Input placeholder="Email address" name="email" />
-            <Input placeholder="Mobile number" name="phoneNumber" />
+            <Input
+              placeholder="Email address"
+              name="email"
+              value={email}
+              onChange={(value) => setEmail(String(value))}
+            />
+            <Input
+              placeholder="Mobile number"
+              name="mobileNumber"
+              value={mobileNumber}
+              onChange={(value) => setMobileNumber(String(value))}
+            />
           </>
         )}
-        <Button size="small">{isLoggedIn ? 'Log-out' : 'Log-in'}</Button>
       </Stack>
+      <Button size="small">Continue</Button>
     </form>
   )
 }

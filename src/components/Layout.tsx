@@ -4,7 +4,7 @@ import type { PropsWithChildren } from 'react'
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <Box className="min-h-screen w-sm" background="white" marginX="auto">
+    <Box className="min-h-screen w-md" background="white" marginX="auto">
       <Stack
         borderColor="gray30"
         borderStyle="solid"

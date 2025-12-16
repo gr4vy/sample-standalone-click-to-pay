@@ -1,17 +1,23 @@
-import { Button, Stack, Text, type ButtonProps } from '@gr4vy/poutine-react'
+import {
+  Alert,
+  Button,
+  Stack,
+  Text,
+  type ButtonProps,
+} from '@gr4vy/poutine-react'
 import {
   createFileRoute,
   createLink,
   useRouterState,
   type LinkProps,
 } from '@tanstack/react-router'
-import { TopBar } from '../components/TopBar'
-import type { PaymentMethodsProps } from '../components/PaymentMethods'
+import { TopBar, type CheckoutType } from '@/components'
+import type { Transaction, TransactionError } from '@/utils'
 
 declare module '@tanstack/react-router' {
   interface HistoryState {
-    method?: string
-    type?: PaymentMethodsProps['checkoutType']
+    type?: CheckoutType
+    transaction?: Transaction | TransactionError
   }
 }
 
@@ -30,7 +36,10 @@ const RestartButton = ({ children, ...rest }: ButtonProps & LinkProps) => {
 const Link = createLink(RestartButton)
 
 function RouteComponent() {
-  const state = useRouterState({ select: (s) => s.location.state })
+  const { type, transaction } = useRouterState({
+    select: (s) => s.location.state,
+  })
+  const { status, message } = (transaction as TransactionError) || {}
 
   return (
     <Stack padding={24} gap={24}>
@@ -38,8 +47,13 @@ function RouteComponent() {
       <Stack textAlign="center" gap={8}>
         <Text as="h2">Something went wrong...</Text>
         <Text>We couldn't process your transaction, please try again.</Text>
+        <Alert gap={16} variant="negative" paddingX={16} paddingY={8}>
+          <Alert.Text>
+            Error {status}: {message}
+          </Alert.Text>
+        </Alert>
       </Stack>
-      <Link to={`/${state?.type || ''}`}>Restart</Link>
+      <Link to={`/${type || ''}`}>Restart</Link>
     </Stack>
   )
 }
