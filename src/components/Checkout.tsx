@@ -120,7 +120,7 @@ export const CheckoutProvider = ({ children, type }: CheckoutProviderProps) => {
     >
       <Stack padding={24} gap={32}>
         <TopBar title="Checkout" hasBackButton />
-        <ErrorAlert error={error} />
+        {error && <ErrorAlert error={error} />}
         <OrderSummary />
         {children}
       </Stack>

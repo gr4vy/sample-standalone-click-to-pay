@@ -56,7 +56,7 @@ const Form = () => {
       <PaymentMethods>
         {method?.id === 'click-to-pay' && (
           <Dialog open onClose={handleDialogClose}>
-            <ErrorAlert error={error} />
+            {error && <ErrorAlert error={error} />}
             <ClickToPay
               srcDpaId={env.VITE_SRC_DPA_ID}
               dpaName={env.VITE_DPA_NAME}
