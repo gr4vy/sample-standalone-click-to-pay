@@ -19,6 +19,8 @@ import { Route as OverlayProfileRouteImport } from './routes/overlay/profile'
 import { Route as OverlayPaymentRouteImport } from './routes/overlay/payment'
 import { Route as InlineProfileRouteImport } from './routes/inline/profile'
 import { Route as InlinePaymentRouteImport } from './routes/inline/payment'
+import { Route as ActionSheetProfileRouteImport } from './routes/action-sheet/profile'
+import { Route as ActionSheetPaymentRouteImport } from './routes/action-sheet/payment'
 
 const SuccessRoute = SuccessRouteImport.update({
   id: '/success',
@@ -70,14 +72,26 @@ const InlinePaymentRoute = InlinePaymentRouteImport.update({
   path: '/payment',
   getParentRoute: () => InlineRoute,
 } as any)
+const ActionSheetProfileRoute = ActionSheetProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => ActionSheetRoute,
+} as any)
+const ActionSheetPaymentRoute = ActionSheetPaymentRouteImport.update({
+  id: '/payment',
+  path: '/payment',
+  getParentRoute: () => ActionSheetRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/action-sheet': typeof ActionSheetRoute
+  '/action-sheet': typeof ActionSheetRouteWithChildren
   '/failure': typeof FailureRoute
   '/inline': typeof InlineRouteWithChildren
   '/overlay': typeof OverlayRouteWithChildren
   '/success': typeof SuccessRoute
+  '/action-sheet/payment': typeof ActionSheetPaymentRoute
+  '/action-sheet/profile': typeof ActionSheetProfileRoute
   '/inline/payment': typeof InlinePaymentRoute
   '/inline/profile': typeof InlineProfileRoute
   '/overlay/payment': typeof OverlayPaymentRoute
@@ -85,11 +99,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/action-sheet': typeof ActionSheetRoute
+  '/action-sheet': typeof ActionSheetRouteWithChildren
   '/failure': typeof FailureRoute
   '/inline': typeof InlineRouteWithChildren
   '/overlay': typeof OverlayRouteWithChildren
   '/success': typeof SuccessRoute
+  '/action-sheet/payment': typeof ActionSheetPaymentRoute
+  '/action-sheet/profile': typeof ActionSheetProfileRoute
   '/inline/payment': typeof InlinePaymentRoute
   '/inline/profile': typeof InlineProfileRoute
   '/overlay/payment': typeof OverlayPaymentRoute
@@ -98,11 +114,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/action-sheet': typeof ActionSheetRoute
+  '/action-sheet': typeof ActionSheetRouteWithChildren
   '/failure': typeof FailureRoute
   '/inline': typeof InlineRouteWithChildren
   '/overlay': typeof OverlayRouteWithChildren
   '/success': typeof SuccessRoute
+  '/action-sheet/payment': typeof ActionSheetPaymentRoute
+  '/action-sheet/profile': typeof ActionSheetProfileRoute
   '/inline/payment': typeof InlinePaymentRoute
   '/inline/profile': typeof InlineProfileRoute
   '/overlay/payment': typeof OverlayPaymentRoute
@@ -117,6 +135,8 @@ export interface FileRouteTypes {
     | '/inline'
     | '/overlay'
     | '/success'
+    | '/action-sheet/payment'
+    | '/action-sheet/profile'
     | '/inline/payment'
     | '/inline/profile'
     | '/overlay/payment'
@@ -129,6 +149,8 @@ export interface FileRouteTypes {
     | '/inline'
     | '/overlay'
     | '/success'
+    | '/action-sheet/payment'
+    | '/action-sheet/profile'
     | '/inline/payment'
     | '/inline/profile'
     | '/overlay/payment'
@@ -141,6 +163,8 @@ export interface FileRouteTypes {
     | '/inline'
     | '/overlay'
     | '/success'
+    | '/action-sheet/payment'
+    | '/action-sheet/profile'
     | '/inline/payment'
     | '/inline/profile'
     | '/overlay/payment'
@@ -149,7 +173,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ActionSheetRoute: typeof ActionSheetRoute
+  ActionSheetRoute: typeof ActionSheetRouteWithChildren
   FailureRoute: typeof FailureRoute
   InlineRoute: typeof InlineRouteWithChildren
   OverlayRoute: typeof OverlayRouteWithChildren
@@ -228,8 +252,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InlinePaymentRouteImport
       parentRoute: typeof InlineRoute
     }
+    '/action-sheet/profile': {
+      id: '/action-sheet/profile'
+      path: '/profile'
+      fullPath: '/action-sheet/profile'
+      preLoaderRoute: typeof ActionSheetProfileRouteImport
+      parentRoute: typeof ActionSheetRoute
+    }
+    '/action-sheet/payment': {
+      id: '/action-sheet/payment'
+      path: '/payment'
+      fullPath: '/action-sheet/payment'
+      preLoaderRoute: typeof ActionSheetPaymentRouteImport
+      parentRoute: typeof ActionSheetRoute
+    }
   }
 }
+
+interface ActionSheetRouteChildren {
+  ActionSheetPaymentRoute: typeof ActionSheetPaymentRoute
+  ActionSheetProfileRoute: typeof ActionSheetProfileRoute
+}
+
+const ActionSheetRouteChildren: ActionSheetRouteChildren = {
+  ActionSheetPaymentRoute: ActionSheetPaymentRoute,
+  ActionSheetProfileRoute: ActionSheetProfileRoute,
+}
+
+const ActionSheetRouteWithChildren = ActionSheetRoute._addFileChildren(
+  ActionSheetRouteChildren,
+)
 
 interface InlineRouteChildren {
   InlinePaymentRoute: typeof InlinePaymentRoute
@@ -259,7 +311,7 @@ const OverlayRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ActionSheetRoute: ActionSheetRoute,
+  ActionSheetRoute: ActionSheetRouteWithChildren,
   FailureRoute: FailureRoute,
   InlineRoute: InlineRouteWithChildren,
   OverlayRoute: OverlayRouteWithChildren,
