@@ -11,10 +11,10 @@ import { useRouter } from '@tanstack/react-router'
 import { useRef, useEffect, type MouseEvent, memo } from 'react'
 import {
   CardForm,
-  Dialog,
   ErrorAlert,
   Loader,
   PaymentMethods,
+  Sheet,
   SubmitButton,
   useCheckout,
 } from '@/components'
@@ -46,7 +46,7 @@ const Form = () => {
     secureFields.submit()
   }
 
-  const handleDialogClose = () => {
+  const handleSheetClose = () => {
     setMethod?.(undefined)
     setIsSubmitBtnHidden?.(true)
   }
@@ -55,7 +55,7 @@ const Form = () => {
     <form onSubmit={handleSubmit} className="space-y-24">
       <PaymentMethods>
         {method?.id === 'click-to-pay' && (
-          <Dialog open onClose={handleDialogClose}>
+          <Sheet open onClose={handleSheetClose}>
             {error && <ErrorAlert error={error} />}
             <ClickToPay
               srcDpaId={env.VITE_SRC_DPA_ID}
@@ -126,7 +126,7 @@ const Form = () => {
               hidden={isSubmitBtnHidden}
               className="mt-8"
             />
-          </Dialog>
+          </Sheet>
         )}
       </PaymentMethods>
     </form>
