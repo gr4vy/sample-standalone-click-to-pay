@@ -2,6 +2,12 @@
 
 A sample application to demonstrate how to integrate Click to Pay using Gr4vy's Secure Fields.
 
+Run the app and see how Click to Pay is integrated:
+
+- [Inline](sample-standalone-click-to-pay/blob/main/src/flows/inline/README.md)
+- [Overlay](sample-standalone-click-to-pay/blob/main/src/flows/overlay/README.md)
+- [Action Sheet](sample-standalone-click-to-pay/blob/main/src/flows/action-sheet/README.md)
+
 ## Installation
 
 ```
