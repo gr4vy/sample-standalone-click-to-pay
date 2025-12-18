@@ -15,17 +15,17 @@
   "dependencies": {
     "@gr4vy/poutine-react": "3.0.2--canary.526.4535b2b.0",
     "@gr4vy/poutine-tokens": "^0.24.0",
-    "@gr4vy/secure-fields-react": "^2.2.0",
+    "@gr4vy/secure-fields-react": "^2.2.2",
     "@tailwindcss/vite": "^4.1.18",
-    "@tanstack/react-router": "^1.139.12",
+    "@tanstack/react-router": "^1.141.6",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "@gr4vy/sdk": "^1.9.3",
-    "@tanstack/router-plugin": "^1.139.12",
+    "@gr4vy/sdk": "^1.9.4",
+    "@tanstack/router-plugin": "^1.141.7",
     "@types/node": "^24.10.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -42,7 +42,7 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.50.0",
-    "vite": "^7.2.7",
+    "vite": "^7.3.0",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
