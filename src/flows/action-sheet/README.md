@@ -62,4 +62,4 @@ const handleSubmit = () => secureFields.submit()
 </form>
 ```
 
-See the full code [here](sample-standalone-click-to-pay/blob/main/src/flows/action-sheet/ActionSheet.tsx).
+See the full code [here](ActionSheet.tsx).
