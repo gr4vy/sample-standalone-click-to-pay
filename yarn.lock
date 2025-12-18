@@ -665,10 +665,10 @@
   resolved "https://registry.npmjs.org/@gr4vy/poutine-tokens/-/poutine-tokens-0.24.0.tgz#f357fcdc61a0316da7068911701cac53b53cfbe9"
   integrity sha512-0WHYfPyrBcWQWNg0lqp9KLIjafaUyceBPEMG961V6ZHtE+g+75xzGU48aLopq14xWTqpDxuIRiFVSuPSYX2jBQ==
 
-"@gr4vy/sdk@^1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@gr4vy/sdk/-/sdk-1.9.3.tgz#6e0b66cf66f428ba368affd1d4c52c8dd3805aec"
-  integrity sha512-Thy4HR1UB+fnHbMhzJRf2oDnERQLHa/Q+vsCUkRbRCjHCtwxP3KZuPhQT5Zsb+8VxkEdgWLG1joGOTK89qm9GA==
+"@gr4vy/sdk@^1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@gr4vy/sdk/-/sdk-1.9.4.tgz#edb2e9b3f034535ef43df03a73ed28e5d7a77298"
+  integrity sha512-DTdvEB2CA2Bc22QFfP+eKN0dmnwzWFkOQpM7bnD5xEaOEyjcDAqa2sTC66SlujRnAfWZUyrHcW4EVxj+AfwO0A==
   dependencies:
     "@trust/keyto" "^1.0.1"
     jsonwebtoken "^9.0.3"
