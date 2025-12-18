@@ -4,7 +4,7 @@ You can choose to render Click to Pay as a payment method within an action sheet
 
 ![Action Sheet](preview.png?raw=true)
 
-```
+```jsx
 // main App
 <SecureFields
   gr4vyId={env.VITE_GR4VY_ID}
