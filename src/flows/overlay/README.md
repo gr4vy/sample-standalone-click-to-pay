@@ -2,6 +2,8 @@
 
 You can choose to render Click to Pay as a payment method within an overlay.
 
+![Action Sheet](preview.png?raw=true)
+
 ```
 // main App
 <SecureFields
