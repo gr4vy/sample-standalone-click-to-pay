@@ -4,9 +4,9 @@ A sample application to demonstrate how to integrate Click to Pay using Gr4vy's 
 
 Run the app and see how Click to Pay is integrated:
 
-- [Inline](sample-standalone-click-to-pay/blob/main/src/flows/inline/README.md)
-- [Overlay](sample-standalone-click-to-pay/blob/main/src/flows/overlay/README.md)
-- [Action Sheet](sample-standalone-click-to-pay/blob/main/src/flows/action-sheet/README.md)
+- [Inline](src/flows/inline/README.md)
+- [Overlay](src/flows/overlay/README.md)
+- [Action Sheet](src/flows/action-sheet/README.md)
 
 ## Installation
 
@@ -18,9 +18,9 @@ yarn install
 
 Copy the `.env.example` as `.env` and update accordingly.
 
-In development mode, you'll need to generate a private key on the Gr4vy portal, which is going to be used to create a valid token that will allow talking to the Gr4vy's API. You can find more information on how to generate one https://docs.gr4vy.com/guides/payments/secure-fields/quick-start/key.
+In development mode, you'll need to generate a private key on the Gr4vy portal, which is going to be used to create a valid token that will allow authentication to the Gr4vy's API. You can find more information on how to generate one https://docs.gr4vy.com/guides/payments/secure-fields/quick-start/key.
 
-Once you have the private key, base64 encode it and copy the resulting string as value for the `GR4VY_PRIVATE_KEY` environment variable:
+Once you have the private key, Base64-encode its value and copy the resulting string as value for the `GR4VY_PRIVATE_KEY` environment variable:
 
 `GR4VY_PRIVATE_KEY=LS0tLS1...`
 
