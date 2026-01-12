@@ -15,7 +15,7 @@
   "dependencies": {
     "@gr4vy/poutine-react": "3.0.2--canary.526.4535b2b.0",
     "@gr4vy/poutine-tokens": "^0.25.0",
-    "@gr4vy/secure-fields-react": "^2.2.2",
+    "@gr4vy/secure-fields-react": "^2.2.3",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-router": "^1.147.3",
     "react": "^19.2.3",
