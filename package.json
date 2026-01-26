@@ -27,7 +27,7 @@
     "@gr4vy/sdk": "^1.9.17",
     "@tanstack/router-plugin": "^1.157.14",
     "@types/node": "^24.10.9",
-    "@types/react": "^19.2.8",
+    "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.2.2",
     "dotenv": "^17.2.3",
