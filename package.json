@@ -17,7 +17,7 @@
     "@gr4vy/poutine-tokens": "^0.25.0",
     "@gr4vy/secure-fields-react": "^2.2.5",
     "@tailwindcss/vite": "^4.1.18",
-    "@tanstack/react-router": "^1.151.6",
+    "@tanstack/react-router": "^1.157.14",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "tailwindcss": "^4.1.18"
@@ -25,7 +25,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "@gr4vy/sdk": "^1.9.17",
-    "@tanstack/router-plugin": "^1.151.6",
+    "@tanstack/router-plugin": "^1.157.14",
     "@types/node": "^24.10.9",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
