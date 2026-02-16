@@ -18,8 +18,8 @@
     "@gr4vy/secure-fields-react": "^2.2.5",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-router": "^1.160.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
     "@gr4vy/sdk": "^1.10.4",
     "@tanstack/router-plugin": "^1.160.0",
     "@types/node": "^24.10.13",
-    "@types/react": "^19.2.9",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.2.3",
     "dotenv": "^17.3.1",
