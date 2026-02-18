@@ -8,7 +8,7 @@ import {
   useSecureFields,
 } from '@gr4vy/secure-fields-react'
 import { useRouter } from '@tanstack/react-router'
-import { useRef, useEffect, type MouseEvent, memo } from 'react'
+import { useRef, useEffect, type SubmitEventHandler, memo } from 'react'
 import {
   CardForm,
   Loader,
@@ -29,7 +29,7 @@ const Form = () => {
   const { secureFields } = useSecureFields()
   const { canSubmit, user, isPending } = useCheckout()
 
-  const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     secureFields.submit()
   }

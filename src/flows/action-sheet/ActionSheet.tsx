@@ -8,7 +8,7 @@ import {
   useSecureFields,
 } from '@gr4vy/secure-fields-react'
 import { useRouter } from '@tanstack/react-router'
-import { useRef, useEffect, type MouseEvent, memo } from 'react'
+import { useRef, useEffect, type SubmitEventHandler, memo } from 'react'
 import {
   CardForm,
   ErrorAlert,
@@ -40,7 +40,7 @@ const Form = () => {
     error,
   } = useCheckout()
 
-  const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     setIsSubmitBtnHidden?.(true)
     secureFields.submit()
