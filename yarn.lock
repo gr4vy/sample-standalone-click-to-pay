@@ -583,10 +583,10 @@
   resolved "https://registry.yarnpkg.com/@gr4vy/poutine-tokens/-/poutine-tokens-0.25.0.tgz#d52e88ef231db7428ca73b1e2d766487b0bd49cd"
   integrity sha512-50PmDW99v9YbYderJAxrLBW6FJwa5NmvEMNHcB6nGW7Ujqt27OC7J4fO66YTMz02BgiYMYMOi93FyUeZ28yeIQ==
 
-"@gr4vy/sdk@^1.10.4":
-  version "1.10.4"
-  resolved "https://registry.yarnpkg.com/@gr4vy/sdk/-/sdk-1.10.4.tgz#868397ac328cca4a3f4b0f8e3576f00e15b6143a"
-  integrity sha512-laqNDt3yOxDYbihXACs4zKqtBOF7duqDn+AxYKv0g2j8ODkwNGUTrRxqZYudikQLlL9WbGpOiPA7gueOtxA9tg==
+"@gr4vy/sdk@^1.10.8":
+  version "1.10.8"
+  resolved "https://registry.yarnpkg.com/@gr4vy/sdk/-/sdk-1.10.8.tgz#a16fc008e758c4927de9862a4d6d687940a81796"
+  integrity sha512-aKlNKELHaJy5C9GFHU6tMVvzxuXOV1/bwcgz8wcdFmoFqh1HKcF5X+iyeaji2k/UkfNH1TFBxSpfH3hEDDyP5A==
   dependencies:
     "@trust/keyto" "^1.0.1"
     jsonwebtoken "^9.0.3"
