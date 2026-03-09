@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.3",
-    "@gr4vy/sdk": "^1.10.12",
+    "@gr4vy/sdk": "^1.10.16",
     "@tanstack/router-plugin": "^1.164.0",
     "@types/node": "^24.11.0",
     "@types/react": "^19.2.14",
