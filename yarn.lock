@@ -1460,19 +1460,19 @@
     "@tailwindcss/oxide" "4.2.1"
     tailwindcss "4.2.1"
 
-"@tanstack/history@1.161.4":
-  version "1.161.4"
-  resolved "https://registry.yarnpkg.com/@tanstack/history/-/history-1.161.4.tgz#89e0b173c93e3b7ecaa7900bdc22b482962624a3"
-  integrity sha512-Kp/WSt411ZWYvgXy6uiv5RmhHrz9cAml05AQPrtdAp7eUqvIDbMGPnML25OKbzR3RJ1q4wgENxDTvlGPa9+Mww==
+"@tanstack/history@1.161.6":
+  version "1.161.6"
+  resolved "https://registry.yarnpkg.com/@tanstack/history/-/history-1.161.6.tgz#9011182f021ef7c9a6a30148570e2b1b99a12d2d"
+  integrity sha512-NaOGLRrddszbQj9upGat6HG/4TKvXLvu+osAIgfxPYA+eIvYKv8GKDJOrY2D3/U9MRnKfMWD7bU4jeD4xmqyIg==
 
-"@tanstack/react-router@^1.166.3":
-  version "1.166.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-router/-/react-router-1.166.3.tgz#baba1a4f1103a3f3f06bd3dc88a2eb825ab04368"
-  integrity sha512-5NOwAnEp+koHYaRkK5+biYiuOxnQe/7q8R7LLAJ5Ryk6hXoIimOv6gWimPxANwhCWg9spfRZCNswi8EQaidYBg==
+"@tanstack/react-router@^1.167.3":
+  version "1.167.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-router/-/react-router-1.167.3.tgz#1f1d0f91b717065553882c9e34fa2d329b25f454"
+  integrity sha512-1qbSy4r+O7IBdmPLlcKsjB041Gq2MMnIEAYSGIjaMZIL4duUIQnOWLw4jTfjKil/IJz/9rO5JcvrbxOG5UTSdg==
   dependencies:
-    "@tanstack/history" "1.161.4"
+    "@tanstack/history" "1.161.6"
     "@tanstack/react-store" "^0.9.1"
-    "@tanstack/router-core" "1.166.2"
+    "@tanstack/router-core" "1.167.3"
     isbot "^5.1.22"
     tiny-invariant "^1.3.3"
     tiny-warning "^1.0.3"
@@ -1485,12 +1485,12 @@
     "@tanstack/store" "0.9.1"
     use-sync-external-store "^1.6.0"
 
-"@tanstack/router-core@1.166.2":
-  version "1.166.2"
-  resolved "https://registry.yarnpkg.com/@tanstack/router-core/-/router-core-1.166.2.tgz#925e0b4c0814e5edbc8221143e3e0d91ec053828"
-  integrity sha512-zn3NhENOAX9ToQiX077UV2OH3aJKOvV2ZMNZZxZ3gDG3i3WqL8NfWfEgetEAfMN37/Mnt90PpotYgf7IyuoKqQ==
+"@tanstack/router-core@1.167.3":
+  version "1.167.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/router-core/-/router-core-1.167.3.tgz#87101aa2e116ad5f69933a4508df69db242af266"
+  integrity sha512-M/CxrTGKk1fsySJjd+Pzpbi3YLDz+cJSutDjSTMy12owWlOgHV/I6kzR0UxyaBlHraM6XgMHNA0XdgsS1fa4Nw==
   dependencies:
-    "@tanstack/history" "1.161.4"
+    "@tanstack/history" "1.161.6"
     "@tanstack/store" "^0.9.1"
     cookie-es "^2.0.0"
     seroval "^1.4.2"
@@ -1498,24 +1498,24 @@
     tiny-invariant "^1.3.3"
     tiny-warning "^1.0.3"
 
-"@tanstack/router-generator@1.166.2":
-  version "1.166.2"
-  resolved "https://registry.yarnpkg.com/@tanstack/router-generator/-/router-generator-1.166.2.tgz#3996a0424c9e68f067af8457bc9d86e03f45a988"
-  integrity sha512-wbvdyP1PKKQKk4aVlGeK9S5uDy8zodTr3tEZ2gRKNavJLusXbEWqtoo42JxHFFNB6dtguehFMt8PyZPAtkgWwQ==
+"@tanstack/router-generator@1.166.11":
+  version "1.166.11"
+  resolved "https://registry.yarnpkg.com/@tanstack/router-generator/-/router-generator-1.166.11.tgz#3ba991859ae5a81206651c13f2854936f0a657a1"
+  integrity sha512-Q/49wxURbft1oNOvo/eVAWZq/lNLK3nBGlavqhLToAYXY6LCzfMtRlE/y3XPHzYC9pZc09u5jvBR1k1E4hyGDQ==
   dependencies:
-    "@tanstack/router-core" "1.166.2"
-    "@tanstack/router-utils" "1.161.4"
-    "@tanstack/virtual-file-routes" "1.161.4"
+    "@tanstack/router-core" "1.167.3"
+    "@tanstack/router-utils" "1.161.6"
+    "@tanstack/virtual-file-routes" "1.161.6"
     prettier "^3.5.0"
     recast "^0.23.11"
     source-map "^0.7.4"
     tsx "^4.19.2"
     zod "^3.24.2"
 
-"@tanstack/router-plugin@^1.166.3":
-  version "1.166.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/router-plugin/-/router-plugin-1.166.3.tgz#f4711fceada14d8ec85fd732bce87adacd6d587d"
-  integrity sha512-yhnJRohpdKB24Fh7fW5mwgffpOcERZlXdk3i8PjXn+OYgAiG/cpuXXOJpZZ6An68vDW+Z5zBuTynXsDi2ZE4JQ==
+"@tanstack/router-plugin@^1.166.12":
+  version "1.166.12"
+  resolved "https://registry.yarnpkg.com/@tanstack/router-plugin/-/router-plugin-1.166.12.tgz#4fdc652939d559bfa935b516a1d45443689687c4"
+  integrity sha512-PYsnN6goK6zBaVo63UVKjofv69+HHMKRQXymwN55JYKguNnNR8OZ6E12icPb0Olc5uIpPiGz1YI2+rbpmNKGHA==
   dependencies:
     "@babel/core" "^7.28.5"
     "@babel/plugin-syntax-jsx" "^7.27.1"
@@ -1523,18 +1523,18 @@
     "@babel/template" "^7.27.2"
     "@babel/traverse" "^7.28.5"
     "@babel/types" "^7.28.5"
-    "@tanstack/router-core" "1.166.2"
-    "@tanstack/router-generator" "1.166.2"
-    "@tanstack/router-utils" "1.161.4"
-    "@tanstack/virtual-file-routes" "1.161.4"
+    "@tanstack/router-core" "1.167.3"
+    "@tanstack/router-generator" "1.166.11"
+    "@tanstack/router-utils" "1.161.6"
+    "@tanstack/virtual-file-routes" "1.161.6"
     chokidar "^3.6.0"
     unplugin "^2.1.2"
     zod "^3.24.2"
 
-"@tanstack/router-utils@1.161.4":
-  version "1.161.4"
-  resolved "https://registry.yarnpkg.com/@tanstack/router-utils/-/router-utils-1.161.4.tgz#b51659a4fdbe6b168d424186413ff1d4354f9b94"
-  integrity sha512-r8TpjyIZoqrXXaf2DDyjd44gjGBoyE+/oEaaH68yLI9ySPO1gUWmQENZ1MZnmBnpUGN24NOZxdjDLc8npK0SAw==
+"@tanstack/router-utils@1.161.6":
+  version "1.161.6"
+  resolved "https://registry.yarnpkg.com/@tanstack/router-utils/-/router-utils-1.161.6.tgz#78b294728f22f33e6815f914b041a3117728a6eb"
+  integrity sha512-nRcYw+w2OEgK6VfjirYvGyPLOK+tZQz1jkYcmH5AjMamQ9PycnlxZF2aEZtPpNoUsaceX2bHptn6Ub5hGXqNvw==
   dependencies:
     "@babel/core" "^7.28.5"
     "@babel/generator" "^7.28.5"
@@ -1551,10 +1551,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/store/-/store-0.9.1.tgz#965130b17e655385a38b963d82446bcdaf41e878"
   integrity sha512-+qcNkOy0N1qSGsP7omVCW0SDrXtaDcycPqBDE726yryiA5eTDFpjBReaYjghVJwNf1pcPMyzIwTGlYjCSQR0Fg==
 
-"@tanstack/virtual-file-routes@1.161.4":
-  version "1.161.4"
-  resolved "https://registry.yarnpkg.com/@tanstack/virtual-file-routes/-/virtual-file-routes-1.161.4.tgz#d86cf053b93bfdb5417ca8cb69f73ad6da88d5ef"
-  integrity sha512-42WoRePf8v690qG8yGRe/YOh+oHni9vUaUUfoqlS91U2scd3a5rkLtVsc6b7z60w3RogH0I00vdrC5AaeiZ18w==
+"@tanstack/virtual-file-routes@1.161.6":
+  version "1.161.6"
+  resolved "https://registry.yarnpkg.com/@tanstack/virtual-file-routes/-/virtual-file-routes-1.161.6.tgz#041e5fed0d182d25bc3d1ba3633ef143386f44ae"
+  integrity sha512-EGWs9yvJA821pUkwkiZLQW89CzUumHyJy8NKq229BubyoWXfDw1oWnTJYSS/hhbLiwP9+KpopjeF5wWwnCCyeQ==
 
 "@trust/keyto@^1.0.1":
   version "1.0.1"
