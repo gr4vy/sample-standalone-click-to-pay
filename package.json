@@ -46,6 +46,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "resolutions": {
+    "eslint-plugin-import/minimatch": "^3.1.5",
     "flatted": "^3.4.2"
   }
 }
