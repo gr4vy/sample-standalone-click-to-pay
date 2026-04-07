@@ -47,6 +47,7 @@
   },
   "resolutions": {
     "eslint-plugin-import/minimatch": "^3.1.5",
-    "flatted": "^3.4.2"
+    "flatted": "^3.4.2",
+    "typescript-eslint/**/minimatch": "^10.2.3"
   }
 }
