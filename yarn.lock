@@ -617,17 +617,17 @@
     uuid "^11.1.0"
     zod "^3.25.0 || ^4.0.0"
 
-"@gr4vy/secure-fields-react@^2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@gr4vy/secure-fields-react/-/secure-fields-react-2.3.1.tgz#9189500a77406919d89f868d09d817f5585b0bc2"
-  integrity sha512-0SQukTzKOrNwJTzEp6E/hqEQIjr8D39teLZJAy40bOQizxR+/yrR6KqH3mG2NV7rpulPJiv9UDjAfCirEpJ2+Q==
+"@gr4vy/secure-fields-react@^2.3.3":
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@gr4vy/secure-fields-react/-/secure-fields-react-2.3.3.tgz#cb3676c56ca5d1c05c988a1747a071e92b5300a6"
+  integrity sha512-xXce2UfuCw8+PfvoBEZOjDB8J/58ow7XFYjtZ4f11QRWf57hZdqwe0QS3Wbp/n9ZAh94bfQcFQT8l+hXrVkeCg==
   dependencies:
-    "@gr4vy/secure-fields" "^2.3.1"
+    "@gr4vy/secure-fields" "^2.3.3"
 
-"@gr4vy/secure-fields@^2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@gr4vy/secure-fields/-/secure-fields-2.3.1.tgz#73e495e5d987067c3ceee3b8cc9f677034cdac3b"
-  integrity sha512-5ZSCQwmxpliHn3FEQykicwhFNABBL9RFul3VFQp9V5nm3/16LxgTDmlwQA+fXpvsOxi7c0Ltbc+rvDsRtuTU0g==
+"@gr4vy/secure-fields@^2.3.3":
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@gr4vy/secure-fields/-/secure-fields-2.3.3.tgz#2bfd8dadde4a3850be1a30434087036848f89232"
+  integrity sha512-ryVIqYyHC/fa+0oF/sM24QCOGdFLFwsj9x0T1vGnYzT7lTTeDKfhGevSJub+jx4iiaSHLfZ5Zqs//9UH5ORL4Q==
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"
