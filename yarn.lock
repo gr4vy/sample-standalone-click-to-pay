@@ -470,10 +470,10 @@
   resolved "https://registry.npmjs.org/@gr4vy/poutine-tokens/-/poutine-tokens-0.22.1.tgz#dbf834bfcaf1934b38b32bbc866298a7bf2924ef"
   integrity sha512-rSYgYpawW5ZRfnyZ9hK7aUcoR77QKefX+b0TTR91gqu6EEeuZhvPVJNxE0qCsyPbh8F2/veg9MhSrFpe5xrbzg==
 
-"@gr4vy/poutine-tokens@^0.25.0":
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/@gr4vy/poutine-tokens/-/poutine-tokens-0.25.0.tgz#d52e88ef231db7428ca73b1e2d766487b0bd49cd"
-  integrity sha512-50PmDW99v9YbYderJAxrLBW6FJwa5NmvEMNHcB6nGW7Ujqt27OC7J4fO66YTMz02BgiYMYMOi93FyUeZ28yeIQ==
+"@gr4vy/poutine-tokens@^0.26.0":
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/@gr4vy/poutine-tokens/-/poutine-tokens-0.26.0.tgz#60b15f6959902981a09d6eff5c86aa83950248c0"
+  integrity sha512-OF65mL3ZT+ihravpY1r8ekKttXDAG6D/+iaDe02YqIYijmavx3zjJTPvo0S9WXE8HhS4Xytk7j8SMAxvnT83Yw==
 
 "@gr4vy/sdk@^1.10.18":
   version "1.10.18"
